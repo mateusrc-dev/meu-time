@@ -1,11 +1,14 @@
+import { SignIn } from "phosphor-react";
+import { Body, Button, Container, Input } from "../styles/pages/login";
+
 export default function Login() {
   return (
-      <>
-        <h1>Essa vai ser uma página de login</h1>
-        <h1>Meu Time</h1>
-        <p>Insira abaixo o seu token</p>
-        <input placeholder="Insira aqui o seu token!" />
-        <button>Entrar</button>
-      </>
+      <Container>
+        <Body>
+          <p>Insira abaixo o key da sua conta da API-Football</p>
+          <Input placeholder="Insira aqui o key da sua conta!" />
+          <Button>Entrar <SignIn color="#1d3557" weight="duotone" size={16} /></Button>
+        </Body>
+      </Container>
     )
 }
