@@ -1,5 +1,5 @@
 import { MultiStep } from '../components/MultiStep'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { ArrowBendRightDown, ArrowBendUpLeft, SoccerBall } from 'phosphor-react'
 
@@ -10,6 +10,7 @@ import {
 } from '../styles/pages/selectTeams'
 import Team from '../components/team'
 import { useRouter } from 'next/router'
+import { OptionsSelectedContext } from '../contexts/saveSelectedOptions'
 
 interface TeamsProps {
   team_id: string
@@ -20,6 +21,7 @@ interface TeamsProps {
 
 export default function SelectTeams() {
   const [teams /* setTeams */] = useState<TeamsProps[]>([])
+  const { league, season } = useContext(OptionsSelectedContext)
   const router = useRouter()
 
   function handleClickTeam(teamId: string) {
@@ -35,9 +37,8 @@ export default function SelectTeams() {
   useEffect(() => {
     async function handleFindTeams() {
       const res = await axios.get(
-        'https://v3.football.api-sports.io/teams?league=39&season=2019',
+        `https://v3.football.api-sports.io/teams?league=${league}&season=${season}`,
         {
-          // aqui temos como colocar query params
           headers: {
             'x-rapidapi-key': 'd9b4ea21a1cdeb03bfef53a5c77411f2',
             'x-rapidapi-host': 'v3.football.api-sports.io',
@@ -48,7 +49,7 @@ export default function SelectTeams() {
       // setTeams(res.data.response)
     }
     handleFindTeams()
-  }, [])
+  }, [league, season])
 
   return (
     <Container>

@@ -1,5 +1,5 @@
 import { MultiStep } from '../components/MultiStep'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { ArrowBendRightDown, ArrowBendUpLeft, SoccerBall } from 'phosphor-react'
 
@@ -10,6 +10,7 @@ import {
 } from '../styles/pages/selectLeagues'
 import League from '../components/league'
 import { useRouter } from 'next/router'
+import { OptionsSelectedContext } from '../contexts/saveSelectedOptions'
 
 interface LeaguesProps {
   country: {
@@ -33,12 +34,13 @@ interface LeaguesProps {
 
 export default function SelectLeagues() {
   const [leagues /* setLeagues */] = useState<LeaguesProps[]>([])
+  const { handleLeague, country, season } = useContext(OptionsSelectedContext)
   const router = useRouter()
 
   console.log(leagues)
 
   function handleClickLeague(leagueId: number) {
-    // vamos usar o Id da liga no localStorage
+    handleLeague(leagueId)
     router.push('/selectTeams')
   }
 
@@ -49,9 +51,8 @@ export default function SelectLeagues() {
   useEffect(() => {
     async function handleFindLeagues() {
       const res = await axios.get(
-        'https://v3.football.api-sports.io/leagues?country=england&season=2019',
+        `https://v3.football.api-sports.io/leagues?country=${country}&season=${season}`,
         {
-          // aqui temos como colocar query params - vamos pegar o valor desses query params pelas rotas
           headers: {
             'x-rapidapi-key': 'd9b4ea21a1cdeb03bfef53a5c77411f2',
             'x-rapidapi-host': 'v3.football.api-sports.io',
@@ -62,7 +63,7 @@ export default function SelectLeagues() {
       // setLeagues(res.data.response)
     }
     handleFindLeagues()
-  }, [])
+  }, [country, season])
 
   return (
     <Container>

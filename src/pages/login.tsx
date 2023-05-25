@@ -19,11 +19,12 @@ export default function Login() {
         'x-rapidapi-host': 'v3.football.api-sports.io',
       },
     })
-    console.log(res.data.response.account.email)
 
-    if (res.data.response.account.email) {
+    if (res.data.response.account?.email) {
       handleUserKey(keyUser)
       router.push('/selectCountries')
+    } else {
+      alert('Não foi possível entrar!')
     }
   }
 

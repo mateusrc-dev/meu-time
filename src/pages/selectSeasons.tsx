@@ -1,5 +1,5 @@
 import { MultiStep } from '../components/MultiStep'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Season from '../components/season'
 import { ArrowBendRightDown, ArrowBendUpLeft, SoccerBall } from 'phosphor-react'
@@ -10,14 +10,16 @@ import {
   HeaderSeasons,
 } from '../styles/pages/selectSeasons'
 import { useRouter } from 'next/router'
+import { OptionsSelectedContext } from '../contexts/saveSelectedOptions'
 
 export default function SelectSeasons() {
   const [seasons, setSeasons] = useState<number[]>([])
+  const { handleSeason } = useContext(OptionsSelectedContext)
   const router = useRouter()
 
   function handleClickSeason(season: number) {
-    // salvar aqui o nome da season no localStorage
     router.push('/selectLeagues')
+    handleSeason(season)
   }
 
   function handleReturn() {

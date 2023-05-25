@@ -3,11 +3,11 @@ import { ReactNode, useState, createContext, useEffect } from 'react'
 interface selectOptionsContextType {
   country: string
   season: number
-  league: string
+  league: number
   userKey: string
   handleCountry: (country: string) => void
   handleSeason: (season: number) => void
-  handleLeague: (league: string) => void
+  handleLeague: (league: number) => void
   handleUserKey: (key: string) => void
 }
 
@@ -22,10 +22,10 @@ interface OptionsSelectedProviderProps {
 export function OptionsSelectedProvider({
   children,
 }: OptionsSelectedProviderProps) {
-  const [country, setCountry] = useState<string | null>('')
-  const [season, setSeason] = useState<number | null>(0)
-  const [league, setLeague] = useState<string | null>('')
-  const [userKey, setUserKey] = useState<string | null>('')
+  const [country, setCountry] = useState<string | null>(null)
+  const [season, setSeason] = useState<number | null>(null)
+  const [league, setLeague] = useState<number | null>(null)
+  const [userKey, setUserKey] = useState<string | null>(null)
 
   useEffect(() => {
     const storedCountryJSON = localStorage.getItem('@meu-time:country')
@@ -54,7 +54,7 @@ export function OptionsSelectedProvider({
     localStorage.setItem('@meu-time:season', seasonJSON)
   }
 
-  function handleLeague(league: string) {
+  function handleLeague(league: number) {
     setLeague(league)
     const leagueJSON = JSON.stringify(league)
     localStorage.setItem('@meu-time:league', leagueJSON)
