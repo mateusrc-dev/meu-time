@@ -1,11 +1,11 @@
-import { styled } from "..";
+import { styled } from '..'
 
 export const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   height: 'calc(100% - 4rem)',
 
-  'h1': {
+  h1: {
     marginTop: '2rem',
     fontSize: '1rem',
     color: '$blue_100',
@@ -13,7 +13,7 @@ export const Container = styled('div', {
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
-  }
+  },
 })
 
 export const HeaderSeasons = styled('div', {
@@ -30,9 +30,9 @@ export const HeaderSeasons = styled('div', {
     gap: '0.5rem',
     '&:hover': {
       textDecoration: 'underline',
-      filter: 'brightness(0.8)'
-    }
-  }
+      filter: 'brightness(0.8)',
+    },
+  },
 })
 
 export const ContainerSeasons = styled('div', {

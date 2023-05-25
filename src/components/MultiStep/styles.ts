@@ -2,15 +2,15 @@ import { keyframes, styled } from '../../styles'
 
 const changeColor = keyframes({
   '0%': {
-    backgroundColor: '$blue_100'
+    backgroundColor: '$blue_100',
   },
 
   '50%': {
-    backgroundColor: '#a8dadc'
+    backgroundColor: '#a8dadc',
   },
 
   '100%': {
-    backgroundColor: '$blue_100'
+    backgroundColor: '$blue_100',
   },
 })
 
@@ -35,7 +35,7 @@ export const Step = styled('div', {
         animationDirection: 'normal',
         animationDuration: '1s',
         animationTimingFunction: 'ease-in',
-        animationIterationCount: 'infinite'
+        animationIterationCount: 'infinite',
       },
     },
   },

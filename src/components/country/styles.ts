@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { styled } from "../../styles";
+import Image from 'next/image'
+import { styled } from '../../styles'
 
 export const Container = styled('div', {
   padding: '1rem',
@@ -15,7 +15,7 @@ export const Container = styled('div', {
     boxShadow: '6px 6px 5px rgba(0, 0, 0, 0.5)',
     transform: 'translate(-6px, -6px)',
     borderColor: '$red_100',
-  }
+  },
 })
 
 export const Body = styled('div', {
@@ -24,14 +24,14 @@ export const Body = styled('div', {
   alignItems: 'center',
   gap: '1rem',
 
-  'p': {
+  p: {
     fontStyle: 'italic',
     fontSize: '1rem',
-    textDecoration: 'underline'
-  }
+    textDecoration: 'underline',
+  },
 })
 
 export const ImageCountry = styled(Image, {
   borderRadius: '10px',
-  border: '2px solid $blue_200'
+  border: '2px solid $blue_200',
 })

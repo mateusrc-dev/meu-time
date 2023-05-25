@@ -1,4 +1,4 @@
-import { Body, Container, ImageCountry } from "./styles";
+import { Body, Container, ImageLeague } from './styles'
 
 interface Props {
   leagueName: string
@@ -6,10 +6,15 @@ interface Props {
 }
 
 export default function League({ leagueName, leagueLogo }: Props) {
-return (
+  return (
     <Container>
       <Body>
-        <ImageCountry src={leagueLogo} alt="imagem do país" width="132" height="100" />
+        <ImageLeague
+          src={leagueLogo}
+          alt="imagem do país"
+          width="132"
+          height="100"
+        />
         <p>{leagueName}</p>
       </Body>
     </Container>

@@ -1,4 +1,4 @@
-import { Container } from "./styles";
+import { Container } from './styles'
 
 interface Props {
   season: number
@@ -7,9 +7,5 @@ interface Props {
 export default function Season({ season }: Props) {
   console.log(season)
 
-return (
-    <Container>
-        {season}
-    </Container>
-  )
+  return <Container>{season}</Container>
 }

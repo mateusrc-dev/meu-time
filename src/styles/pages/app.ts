@@ -1,4 +1,4 @@
-import { styled, keyframes } from ".."
+import { styled, keyframes } from '..'
 
 const isRotating = keyframes({
   to: {
@@ -28,14 +28,14 @@ export const Header = styled('div', {
   borderRadius: '10px',
   boxShadow: '4px 4px 5px rgba(0, 0, 0, 0.5)',
 
-  'h1': {
+  h1: {
     display: 'flex',
     fontStyle: 'italic',
     fontWeight: 'bold',
     alignItems: 'center',
     gap: '1rem',
-    color: '$blue_100'
-  }
+    color: '$blue_100',
+  },
 })
 
 export const LogoImage = styled('div', {
@@ -46,7 +46,7 @@ export const LogoImage = styled('div', {
   animationDirection: 'normal',
   animationDuration: '3s',
   animationTimingFunction: 'linear',
-  animationIterationCount: 'infinite'
+  animationIterationCount: 'infinite',
 })
 
 export const SignOutContainer = styled('button', {
@@ -57,5 +57,5 @@ export const SignOutContainer = styled('button', {
 
   '&:hover': {
     filter: 'brightness(4)',
-  }
+  },
 })

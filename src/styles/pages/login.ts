@@ -1,4 +1,4 @@
-import { styled, keyframes } from ".."
+import { styled, keyframes } from '..'
 
 export const Container = styled('div', {
   display: 'flex',
@@ -31,11 +31,11 @@ export const Input = styled('input', {
   '&::placeholder': {
     color: '$blue_200',
   },
-  
+
   '&:focus': {
-   borderColor: '$red_100', 
-   outline: 0,
-  }
+    borderColor: '$red_100',
+    outline: 0,
+  },
 })
 
 export const Button = styled('button', {
@@ -49,10 +49,10 @@ export const Button = styled('button', {
   display: 'flex',
   alignItems: 'center',
   gap: '0.5rem',
-  
+
   '&:hover': {
-   borderColor: '$white_100', 
-   backgroundColor: '$blue_200',
-   color: '$white_100',
-  }
+    borderColor: '$white_100',
+    backgroundColor: '$blue_200',
+    color: '$white_100',
+  },
 })
