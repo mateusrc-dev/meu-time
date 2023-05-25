@@ -10,19 +10,24 @@ import {
 import logoImg from '../assets/ball.svg'
 import Image from 'next/image'
 import { SignOut } from 'phosphor-react'
-import { useState } from 'react'
+import { useContext } from 'react'
 import { useRouter } from 'next/router'
-import { OptionsSelectedProvider } from '../contexts/saveSelectedOptions'
+import {
+  OptionsSelectedContext,
+  OptionsSelectedProvider,
+} from '../contexts/saveSelectedOptions'
 
 globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [state /* setState */] = useState<boolean>(true)
   const router = useRouter()
+  const { userKey } = useContext(OptionsSelectedContext)
 
   function handleSignOut() {
     router.push('/login')
   }
+
+  console.log(userKey)
 
   return (
     <Container>
@@ -34,11 +39,11 @@ export default function App({ Component, pageProps }: AppProps) {
             </LogoImage>
             <h1>Meu Time</h1>
           </div>
-          {state && (
+          {String(userKey).length !== 0 ? (
             <SignOutContainer onClick={handleSignOut}>
               <SignOut color="#1d3557" weight="duotone" size="25" />
             </SignOutContainer>
-          )}
+          ) : null}
         </Header>
         <OptionsSelectedProvider>
           <Component {...pageProps} />

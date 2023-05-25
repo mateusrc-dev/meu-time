@@ -15,14 +15,20 @@ interface CountryProps {
 
 export default function SelectCountries() {
   const [countries, setCountries] = useState<CountryProps[]>([])
-  const { handleCountry } = useContext(OptionsSelectedContext)
+  const { handleCountry, country, league, season, userKey } = useContext(
+    OptionsSelectedContext,
+  )
   const router = useRouter()
 
   function handleClickCountry(country: string) {
-    // salvar aqui o nome do país no localStorage
     handleCountry(country)
     router.push('/selectSeasons')
   }
+
+  console.log(country)
+  console.log(league)
+  console.log(season)
+  console.log(userKey)
 
   useEffect(() => {
     async function handleFindCountries() {
