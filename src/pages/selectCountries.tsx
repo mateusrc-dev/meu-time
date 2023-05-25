@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Country from "../components/country";
 import { MultiStep } from "../components/MultiStep";
-import { Container, ContainerCountry } from "../styles/pages/selectCountry";
+import { Container, ContainerCountries } from "../styles/pages/selectCountries";
 import { ArrowBendRightDown } from "phosphor-react";
 import { SoccerBall } from "phosphor-react";
 
@@ -31,14 +31,14 @@ export default function SelectCountries() {
   return (
       <Container>
         <h1><SoccerBall /> Escolha o país do seu time <ArrowBendRightDown /></h1>
-        <ContainerCountry>
+        <ContainerCountries>
           {countries &&
               countries.map((item) => (
                 item.flag &&
               <Country key={String(item.code)} country={item.name} image={item.flag} />
             ))
           }
-        </ContainerCountry>      
+        </ContainerCountries>      
         <MultiStep currentStep={1} size={3} />
       </Container>
     )

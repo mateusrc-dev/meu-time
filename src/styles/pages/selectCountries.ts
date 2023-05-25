@@ -16,7 +16,7 @@ export const Container = styled('div', {
   }
 })
 
-export const ContainerCountry = styled('div', {
+export const ContainerCountries = styled('div', {
   padding: '1rem 1rem',
   marginTop: '1rem',
   marginBottom: 'auto',
