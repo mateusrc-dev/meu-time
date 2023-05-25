@@ -17,12 +17,13 @@ export default function SelectCountries() {
 
   useEffect(() => {
     async function handleFindCountries() {
-    const res = await axios.get("https://v3.football.api-sports.io/countries", {
+    const res = await axios.get("https://v3.football.api-sports.io/countries?page=1&page_size=10", {
       headers: {
         'x-rapidapi-key': 'd9b4ea21a1cdeb03bfef53a5c77411f2',
         'x-rapidapi-host': 'v3.football.api-sports.io'
       },
     })
+    console.log(res.data)
     setCountries(res.data.response)
   }
   handleFindCountries()   

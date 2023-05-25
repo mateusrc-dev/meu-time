@@ -1,4 +1,4 @@
-export default function SelectTime() {
+export default function SelectTeams() {
   return (
       <>
         <h1>Aqui vai aparecer uma lista de times da liga selecionada (persistir dado da liga selecionada em localstorage)</h1>
