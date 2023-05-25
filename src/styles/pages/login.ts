@@ -1,11 +1,5 @@
 import { styled, keyframes } from ".."
 
-const isRotating = keyframes({
-  to: {
-    transform: 'rotate(1turn)',
-  },
-})
-
 export const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',

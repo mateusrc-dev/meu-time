@@ -9,7 +9,7 @@ export default function Country({ image, country }: Props) {
 return (
     <Container>
       <Body>
-        <ImageCountry src={image} alt="imagem do país" width="150" height="100" />
+        <ImageCountry src={image} alt="imagem do país" width="132" height="100" />
         <p>{country}</p>
       </Body>
     </Container>

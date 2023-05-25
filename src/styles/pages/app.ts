@@ -23,7 +23,7 @@ export const Header = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  backgroundColor: '$blue_200',
+  backgroundColor: '$white_100',
   padding: '0.5rem 2rem',
   borderRadius: '10px',
   boxShadow: '4px 4px 5px rgba(0, 0, 0, 0.5)',
@@ -34,6 +34,7 @@ export const Header = styled('div', {
     fontWeight: 'bold',
     alignItems: 'center',
     gap: '1rem',
+    color: '$blue_100'
   }
 })
 
@@ -46,4 +47,15 @@ export const LogoImage = styled('div', {
   animationDuration: '3s',
   animationTimingFunction: 'linear',
   animationIterationCount: 'infinite'
+})
+
+export const SignOutContainer = styled('button', {
+  border: 'none',
+  backgroundColor: 'transparent',
+  transition: 'all 0.5s',
+  cursor: 'pointer',
+
+  '&:hover': {
+    filter: 'brightness(4)',
+  }
 })

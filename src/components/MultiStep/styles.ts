@@ -6,7 +6,7 @@ const changeColor = keyframes({
   },
 
   '50%': {
-    backgroundColor: '$white_100'
+    backgroundColor: '#a8dadc'
   },
 
   '100%': {
@@ -20,6 +20,7 @@ export const Steps = styled('div', {
   display: 'grid',
   gap: '0.5rem',
   gridTemplateColumns: 'repeat(var(--steps-size), 1fr)',
+  marginTop: '1rem',
 })
 
 export const Step = styled('div', {
