@@ -4,6 +4,7 @@ import Country from '../components/country'
 import { MultiStep } from '../components/MultiStep'
 import { Container, ContainerCountries } from '../styles/pages/selectCountries'
 import { ArrowBendRightDown, SoccerBall } from 'phosphor-react'
+import { useRouter } from 'next/router'
 
 interface CountryProps {
   name: string
@@ -13,6 +14,12 @@ interface CountryProps {
 
 export default function SelectCountries() {
   const [countries, setCountries] = useState<CountryProps[]>([])
+  const router = useRouter()
+
+  function handleClickCountry(country: string) {
+    // salvar aqui o nome do país no localStorage
+    router.push('/selectSeasons')
+  }
 
   useEffect(() => {
     async function handleFindCountries() {
@@ -45,11 +52,17 @@ export default function SelectCountries() {
                   key={String(item.code)}
                   country={item.name}
                   image={item.flag}
+                  handleClick={handleClickCountry}
                 />
               ),
           )}
+        <Country
+          country="Mateus"
+          image="https://github.com/mateusrc-dev.png"
+          handleClick={handleClickCountry}
+        />
       </ContainerCountries>
-      <MultiStep currentStep={1} size={3} />
+      <MultiStep currentStep={1} size={4} />
     </Container>
   )
 }

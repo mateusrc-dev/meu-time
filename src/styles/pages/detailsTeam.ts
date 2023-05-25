@@ -16,7 +16,26 @@ export const Container = styled('div', {
   },
 })
 
-export const ContainerCountries = styled('div', {
+export const HeaderTeam = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+
+  'h1:nth-child(2)': {
+    color: '$red_100',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    '&:hover': {
+      textDecoration: 'underline',
+      filter: 'brightness(0.8)',
+    },
+  },
+})
+
+export const ContainerTeams = styled('div', {
   padding: '1rem 1rem',
   marginTop: '1rem',
   marginBottom: 'auto',

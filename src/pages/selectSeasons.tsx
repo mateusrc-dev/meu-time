@@ -9,9 +9,20 @@ import {
   ContainerSeasons,
   HeaderSeasons,
 } from '../styles/pages/selectSeasons'
+import { useRouter } from 'next/router'
 
 export default function SelectSeasons() {
   const [seasons, setSeasons] = useState<number[]>([])
+  const router = useRouter()
+
+  function handleClickSeason(season: number) {
+    // salvar aqui o nome da season no localStorage
+    router.push('/selectLeagues')
+  }
+
+  function handleReturn() {
+    router.push('/selectCountries')
+  }
 
   useEffect(() => {
     async function handleFindCountries() {
@@ -35,16 +46,21 @@ export default function SelectSeasons() {
         <h1>
           <SoccerBall /> Escolha uma temporada <ArrowBendRightDown />
         </h1>
-        <h1>
+        <h1 onClick={handleReturn}>
           <ArrowBendUpLeft /> retornar
         </h1>
       </HeaderSeasons>
       <ContainerSeasons>
         {seasons.map((item) => (
-          <Season key={String(item)} season={item} />
+          <Season
+            key={String(item)}
+            season={item}
+            handleClick={handleClickSeason}
+          />
         ))}
+        <Season season={2023} handleClick={handleClickSeason} />
       </ContainerSeasons>
-      <MultiStep currentStep={2} size={3} />
+      <MultiStep currentStep={2} size={4} />
     </Container>
   )
 }

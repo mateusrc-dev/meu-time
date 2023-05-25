@@ -10,10 +10,19 @@ import {
 import logoImg from '../assets/ball.svg'
 import Image from 'next/image'
 import { SignOut } from 'phosphor-react'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 globalStyles()
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [state /* setState */] = useState<boolean>(true)
+  const router = useRouter()
+
+  function handleSignOut() {
+    router.push('/login')
+  }
+
   return (
     <Container>
       <Body>
@@ -24,9 +33,11 @@ export default function App({ Component, pageProps }: AppProps) {
             </LogoImage>
             <h1>Meu Time</h1>
           </div>
-          <SignOutContainer>
-            <SignOut color="#1d3557" weight="duotone" size="25" />
-          </SignOutContainer>
+          {state && (
+            <SignOutContainer onClick={handleSignOut}>
+              <SignOut color="#1d3557" weight="duotone" size="25" />
+            </SignOutContainer>
+          )}
         </Header>
         <Component {...pageProps} />
       </Body>

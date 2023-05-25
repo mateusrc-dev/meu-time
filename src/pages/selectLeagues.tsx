@@ -9,6 +9,7 @@ import {
   HeaderLeagues,
 } from '../styles/pages/selectLeagues'
 import League from '../components/league'
+import { useRouter } from 'next/router'
 
 interface LeaguesProps {
   country: {
@@ -31,12 +32,22 @@ interface LeaguesProps {
 }
 
 export default function SelectLeagues() {
-  const [leagues, setLeagues] = useState<LeaguesProps[]>([])
+  const [leagues /* setLeagues */] = useState<LeaguesProps[]>([])
+  const router = useRouter()
 
   console.log(leagues)
 
+  function handleClickLeague(leagueId: number) {
+    // vamos usar o Id da liga no localStorage
+    router.push('/selectTeams')
+  }
+
+  function handleReturn() {
+    router.push('/selectSeasons')
+  }
+
   useEffect(() => {
-    async function handleFindCountries() {
+    async function handleFindLeagues() {
       const res = await axios.get(
         'https://v3.football.api-sports.io/leagues?country=england&season=2019',
         {
@@ -50,7 +61,7 @@ export default function SelectLeagues() {
       console.log(res.data)
       // setLeagues(res.data.response)
     }
-    handleFindCountries()
+    handleFindLeagues()
   }, [])
 
   return (
@@ -59,50 +70,56 @@ export default function SelectLeagues() {
         <h1>
           <SoccerBall /> Escolha uma liga <ArrowBendRightDown />
         </h1>
-        <h1>
+        <h1 onClick={handleReturn}>
           <ArrowBendUpLeft /> retornar
         </h1>
       </HeaderLeagues>
       <ContainerLeagues>
         {/* {leagues.map((item) => (
-            <League key={String(item)} season={item} />
+            <League key={String(item)} season={item} handleClick={handleClickLeague} />
           ))
           } */}
         <League
           leagueName="liga bacana"
           leagueLogo="https://github.com/mateusrc-dev.png"
+          handleClick={handleClickLeague}
+          leagueId={1}
         />
         <League
           leagueName="liga bacana"
           leagueLogo="https://github.com/mateusrc-dev.png"
+          handleClick={handleClickLeague}
+          leagueId={1}
         />
         <League
           leagueName="liga bacana"
           leagueLogo="https://github.com/mateusrc-dev.png"
+          handleClick={handleClickLeague}
+          leagueId={1}
         />
         <League
           leagueName="liga bacana"
           leagueLogo="https://github.com/mateusrc-dev.png"
+          handleClick={handleClickLeague}
+          leagueId={1}
         />
         <League
           leagueName="liga bacana"
           leagueLogo="https://github.com/mateusrc-dev.png"
+          handleClick={handleClickLeague}
+          leagueId={1}
         />
         <League
           leagueName="liga bacana"
           leagueLogo="https://github.com/mateusrc-dev.png"
+          handleClick={handleClickLeague}
+          leagueId={1}
         />
         <League
           leagueName="liga bacana"
           leagueLogo="https://github.com/mateusrc-dev.png"
-        />
-        <League
-          leagueName="liga bacana"
-          leagueLogo="https://github.com/mateusrc-dev.png"
-        />
-        <League
-          leagueName="liga bacana"
-          leagueLogo="https://github.com/mateusrc-dev.png"
+          handleClick={handleClickLeague}
+          leagueId={1}
         />
       </ContainerLeagues>
       <MultiStep currentStep={3} size={4} />

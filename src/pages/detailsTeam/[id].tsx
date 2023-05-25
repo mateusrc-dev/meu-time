@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect /* useState */ } from 'react'
+import { Container, HeaderTeam } from '../../styles/pages/detailsTeam'
+import { ArrowBendRightDown, ArrowBendUpLeft, SoccerBall } from 'phosphor-react'
 
 /* interface TeamProps {
   team_id: string
@@ -13,9 +15,11 @@ export default function DetailsTime() {
   // const [teamDetails, setTeamDetails] = useState<TeamProps>()
   // const [players, setPlayers] = useState([])
   // const [teamStatistic, setTeamStatistic] = useState()
-  const { query } = useRouter()
+  const { query, push } = useRouter()
 
-  // `https://v3.football.api-sports.io/players?season=2018&team=${query.id}`
+  function handleReturn() {
+    push('/selectTeams')
+  }
 
   useEffect(() => {
     async function handleFindDetailsTeam() {
@@ -66,8 +70,16 @@ export default function DetailsTime() {
   }, [query])
 
   return (
-    <>
+    <Container>
+      <HeaderTeam>
+        <h1>
+          <SoccerBall /> Detalhes do time <ArrowBendRightDown />
+        </h1>
+        <h1 onClick={handleReturn}>
+          <ArrowBendUpLeft /> retornar
+        </h1>
+      </HeaderTeam>
       <h1>vamos analisar o que vai chegar pela api depois</h1>
-    </>
+    </Container>
   )
 }

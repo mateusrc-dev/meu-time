@@ -3,11 +3,18 @@ import { Body, Container, ImageLeague } from './styles'
 interface Props {
   leagueName: string
   leagueLogo: string
+  handleClick: (season: number) => void
+  leagueId: number
 }
 
-export default function League({ leagueName, leagueLogo }: Props) {
+export default function League({
+  leagueId,
+  leagueName,
+  leagueLogo,
+  handleClick,
+}: Props) {
   return (
-    <Container>
+    <Container onClick={() => handleClick(leagueId)}>
       <Body>
         <ImageLeague
           src={leagueLogo}

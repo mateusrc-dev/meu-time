@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { styled } from '../../styles'
 
-export const Container = styled('div', {
+export const Container = styled('button', {
   padding: '1rem',
   backgroundColor: '$blue_100',
   width: '12rem',

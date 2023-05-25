@@ -3,11 +3,12 @@ import { Body, Container, ImageCountry } from './styles'
 interface Props {
   image: string
   country: string
+  handleClick: (country: string) => void
 }
 
-export default function Country({ image, country }: Props) {
+export default function Country({ image, country, handleClick }: Props) {
   return (
-    <Container>
+    <Container onClick={() => handleClick(country)}>
       <Body>
         <ImageCountry
           src={image}
