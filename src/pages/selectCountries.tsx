@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Country from '../components/country'
 import { MultiStep } from '../components/MultiStep'
 import { Container, ContainerCountries } from '../styles/pages/selectCountries'
 import { ArrowBendRightDown, SoccerBall } from 'phosphor-react'
 import { useRouter } from 'next/router'
+import { OptionsSelectedContext } from '../contexts/saveSelectedOptions'
 
 interface CountryProps {
   name: string
@@ -14,10 +15,12 @@ interface CountryProps {
 
 export default function SelectCountries() {
   const [countries, setCountries] = useState<CountryProps[]>([])
+  const { handleCountry } = useContext(OptionsSelectedContext)
   const router = useRouter()
 
   function handleClickCountry(country: string) {
     // salvar aqui o nome do país no localStorage
+    handleCountry(country)
     router.push('/selectSeasons')
   }
 

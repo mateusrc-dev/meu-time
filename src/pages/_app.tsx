@@ -12,6 +12,7 @@ import Image from 'next/image'
 import { SignOut } from 'phosphor-react'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import { OptionsSelectedProvider } from '../contexts/saveSelectedOptions'
 
 globalStyles()
 
@@ -39,7 +40,9 @@ export default function App({ Component, pageProps }: AppProps) {
             </SignOutContainer>
           )}
         </Header>
-        <Component {...pageProps} />
+        <OptionsSelectedProvider>
+          <Component {...pageProps} />
+        </OptionsSelectedProvider>
       </Body>
     </Container>
   )
