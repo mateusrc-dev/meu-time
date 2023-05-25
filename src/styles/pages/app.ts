@@ -29,8 +29,11 @@ export const Header = styled('div', {
   boxShadow: '4px 4px 5px rgba(0, 0, 0, 0.5)',
 
   'h1': {
+    display: 'flex',
     fontStyle: 'italic',
     fontWeight: 'bold',
+    alignItems: 'center',
+    gap: '1rem',
   }
 })
 

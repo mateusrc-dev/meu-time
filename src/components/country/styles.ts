@@ -24,9 +24,10 @@ export const Body = styled('div', {
   alignItems: 'center',
   gap: '1rem',
 
-  'h1': {
+  'p': {
     fontStyle: 'italic',
     fontSize: '1rem',
+    textDecoration: 'underline'
   }
 })
 
