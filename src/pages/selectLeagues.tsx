@@ -26,14 +26,14 @@ interface LeaguesProps {
   }[]
 }
 
-export default function SelectSeasons() {
+export default function SelectLeagues() {
   const [leagues, setLeagues] = useState<LeaguesProps[]>([])
 
   console.log(leagues)
 
   useEffect(() => {
     async function handleFindCountries() {
-    const res = await axios.get("https://v3.football.api-sports.io/leagues?country=england&season=2019", { // aqui temos como colocar query params
+    const res = await axios.get("https://v3.football.api-sports.io/leagues?country=england&season=2019", { // aqui temos como colocar query params - vamos pegar o valor desses query params pelas rotas
       headers: {
         'x-rapidapi-key': 'd9b4ea21a1cdeb03bfef53a5c77411f2',
         'x-rapidapi-host': 'v3.football.api-sports.io'
