@@ -71,6 +71,7 @@ export const ContainerTeamDetails = styled('div', {
   gap: '0.5rem',
   backgroundColor: '$blue_200',
   width: '15rem',
+  minHeight: '6.5rem',
   padding: '0.5rem 2rem',
   borderRadius: '5px',
   boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.5)',
@@ -97,31 +98,34 @@ export const ButtonTeam = styled('button', {
 
 export const TableTeam = styled('table', {
   margin: '20px auto',
-  border: '1px solid black',
+  border: 'none',
   minWidth: '500px',
   minHeight: '150px',
   padding: '5px 2.5px',
-  backgroundColor: 'rgb(217, 237, 255)',
-  boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.5)',
+  backgroundColor: '$blue_100',
+  boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.5)',
   borderSpacing: '5px',
+  borderRadius: '5px',
 
   thead: {
-    backgroundColor: 'rgb(0, 148, 148)',
-    color: 'white',
+    backgroundColor: '$blue_300',
+    color: '$blue_100',
   },
 
   'thead tr th': {
-    border: '1px solid black',
-    padding: '5px',
+    border: 'none',
+    padding: '0.5rem 1rem',
+    borderRadius: '5px',
   },
 
   tbody: {
     textAlign: 'center',
-    backgroundColor: 'blueviolet',
-    color: 'white',
+    color: '$white_100',
   },
 
   'tbody tr td': {
-    border: '1px solid black',
+    border: '1px solid $white_100',
+    backgroundColor: '$blue_200',
+    borderRadius: '5px',
   },
 })

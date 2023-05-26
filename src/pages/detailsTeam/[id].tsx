@@ -18,6 +18,7 @@ import {
   SoccerBall,
 } from 'phosphor-react'
 import { OptionsSelectedContext } from '../../contexts/saveSelectedOptions'
+import { BarGraph } from '../../components/BarGraph'
 
 /* interface TeamProps {
   team: {
@@ -506,6 +507,7 @@ export default function DetailsTime() {
           {page === 3 && (
             <>
               <h1>gráfico</h1>
+              <BarGraph size={100} currentBar={60} />
             </>
           )}
         </Container>
