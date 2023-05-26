@@ -35,30 +35,14 @@ export const HeaderTeam = styled('div', {
   },
 })
 
-export const ContainerTeams = styled('div', {
-  padding: '1rem 1rem',
-  marginTop: '1rem',
-  marginBottom: 'auto',
+export const ContainerTeamDetails = styled('div', {
   display: 'flex',
-  alignItems: 'center',
-  gap: '1.5rem',
-  flexWrap: 'wrap',
-  overflow: 'auto',
-  '&::-webkit-scrollbar': {
-    width: 15,
-  },
-  '&::-webkit-scrollbar-thumb': {
-    background: '$blue_100',
-    borderRadius: 10,
-    width: 0,
-    backgroundClip: 'padding-box',
-    border: '3px solid transparent',
-  },
-  '&::-webkit-scrollbar-thumb:hover': {
-    backgroundColor: '$blue_200',
-    width: 0,
-    borderRadius: 10,
-    backgroundClip: 'padding-box',
-    border: '3px solid transparent',
-  },
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: '0.5rem',
+  backgroundColor: '$blue_200',
+  width: '10rem',
+  padding: '0.5rem 2rem',
+  borderRadius: '5px',
+  boxShadow: '6px 6px 5px rgba(0, 0, 0, 0.5)',
 })

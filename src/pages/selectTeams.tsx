@@ -13,14 +13,28 @@ import { useRouter } from 'next/router'
 import { OptionsSelectedContext } from '../contexts/saveSelectedOptions'
 
 interface TeamsProps {
-  team_id: string
-  name: string
-  code: string
-  logo: string
+  team: {
+    code: string
+    country: string
+    founded: number
+    id: number
+    logo: string
+    name: string
+    national: boolean
+  }
+  venue: {
+    address: string
+    capacity: number
+    city: string
+    id: number
+    image: string
+    name: string
+    surface: string
+  }
 }
 
 export default function SelectTeams() {
-  const [teams /* setTeams */] = useState<TeamsProps[]>([])
+  const [teams, setTeams] = useState<TeamsProps[]>([])
   const { league, season, country, userKey } = useContext(
     OptionsSelectedContext,
   )
@@ -42,16 +56,16 @@ export default function SelectTeams() {
         `https://v3.football.api-sports.io/teams?league=${league}&season=${season}`,
         {
           headers: {
-            'x-rapidapi-key': 'd9b4ea21a1cdeb03bfef53a5c77411f2',
+            'x-rapidapi-key': `${userKey}`,
             'x-rapidapi-host': 'v3.football.api-sports.io',
           },
         },
       )
       console.log(res.data)
-      // setTeams(res.data.response)
+      setTeams(res.data.response)
     }
     handleFindTeams()
-  }, [league, season])
+  }, [league, season, userKey])
 
   useEffect(() => {
     if (userKey === null) {
@@ -87,10 +101,15 @@ export default function SelectTeams() {
             </h1>
           </HeaderTeams>
           <ContainerTeams>
-            {/* {teams.map((item) => (
-            <Team key={String(item)} season={item} />
-          ))
-          } */}
+            {teams.map((item) => (
+              <Team
+                key={String(item.team.id)}
+                teamName={item.team.name}
+                teamLogo={item.team.logo}
+                handleClick={handleClickTeam}
+                teamId={String(item.team.id)}
+              />
+            ))}
             <Team
               teamName="time bacana"
               teamLogo="https://github.com/mateusrc-dev.png"

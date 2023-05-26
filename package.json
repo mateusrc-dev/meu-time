@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "npx eslint src --ext .tsx,.ts",
-    "lint:fix": "npx eslint src --ext .tsx,.ts --fix"
+    "lint:fix": "npx eslint src --ext .tsx,.ts --fix",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",
@@ -19,7 +21,8 @@
     "phosphor-react": "^1.4.1",
     "qs": "^6.11.2",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "vitest": "^0.31.1"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.2.0",

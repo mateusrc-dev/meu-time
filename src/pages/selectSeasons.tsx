@@ -32,7 +32,7 @@ export default function SelectSeasons() {
         'https://v3.football.api-sports.io/leagues/seasons',
         {
           headers: {
-            'x-rapidapi-key': 'd9b4ea21a1cdeb03bfef53a5c77411f2',
+            'x-rapidapi-key': `${userKey}`,
             'x-rapidapi-host': 'v3.football.api-sports.io',
           },
         },
@@ -40,7 +40,7 @@ export default function SelectSeasons() {
       setSeasons(res.data.response)
     }
     handleFindCountries()
-  }, [])
+  }, [userKey])
 
   useEffect(() => {
     if (userKey === null) {

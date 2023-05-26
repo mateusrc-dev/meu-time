@@ -33,10 +33,10 @@ export default function SelectCountries() {
   useEffect(() => {
     async function handleFindCountries() {
       const res = await axios.get(
-        'https://v3.football.api-sports.io/countries?page=1&page_size=10',
+        'https://v3.football.api-sports.io/countries',
         {
           headers: {
-            'x-rapidapi-key': 'd9b4ea21a1cdeb03bfef53a5c77411f2',
+            'x-rapidapi-key': `${userKey}`,
             'x-rapidapi-host': 'v3.football.api-sports.io',
           },
         },
@@ -45,7 +45,7 @@ export default function SelectCountries() {
       setCountries(res.data.response)
     }
     handleFindCountries()
-  }, [])
+  }, [userKey])
 
   useEffect(() => {
     if (userKey === null) {

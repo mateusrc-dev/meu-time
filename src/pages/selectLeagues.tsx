@@ -33,7 +33,7 @@ interface LeaguesProps {
 }
 
 export default function SelectLeagues() {
-  const [leagues /* setLeagues */] = useState<LeaguesProps[]>([])
+  const [leagues, setLeagues] = useState<LeaguesProps[]>([])
   const { handleLeague, country, season, userKey } = useContext(
     OptionsSelectedContext,
   )
@@ -56,16 +56,16 @@ export default function SelectLeagues() {
         `https://v3.football.api-sports.io/leagues?country=${country}&season=${season}`,
         {
           headers: {
-            'x-rapidapi-key': 'd9b4ea21a1cdeb03bfef53a5c77411f2',
+            'x-rapidapi-key': `${userKey}`,
             'x-rapidapi-host': 'v3.football.api-sports.io',
           },
         },
       )
       console.log(res.data)
-      // setLeagues(res.data.response)
+      setLeagues(res.data.response)
     }
     handleFindLeagues()
-  }, [country, season])
+  }, [country, season, userKey])
 
   useEffect(() => {
     if (userKey === null) {
@@ -94,46 +94,15 @@ export default function SelectLeagues() {
             </h1>
           </HeaderLeagues>
           <ContainerLeagues>
-            {/* {leagues.map((item) => (
-            <League key={String(item)} season={item} handleClick={handleClickLeague} />
-          ))
-          } */}
-            <League
-              leagueName="liga bacana"
-              leagueLogo="https://github.com/mateusrc-dev.png"
-              handleClick={handleClickLeague}
-              leagueId={1}
-            />
-            <League
-              leagueName="liga bacana"
-              leagueLogo="https://github.com/mateusrc-dev.png"
-              handleClick={handleClickLeague}
-              leagueId={1}
-            />
-            <League
-              leagueName="liga bacana"
-              leagueLogo="https://github.com/mateusrc-dev.png"
-              handleClick={handleClickLeague}
-              leagueId={1}
-            />
-            <League
-              leagueName="liga bacana"
-              leagueLogo="https://github.com/mateusrc-dev.png"
-              handleClick={handleClickLeague}
-              leagueId={1}
-            />
-            <League
-              leagueName="liga bacana"
-              leagueLogo="https://github.com/mateusrc-dev.png"
-              handleClick={handleClickLeague}
-              leagueId={1}
-            />
-            <League
-              leagueName="liga bacana"
-              leagueLogo="https://github.com/mateusrc-dev.png"
-              handleClick={handleClickLeague}
-              leagueId={1}
-            />
+            {leagues.map((item) => (
+              <League
+                key={String(item.league.id)}
+                leagueName={item.league.name}
+                leagueLogo={item.league.logo}
+                handleClick={handleClickLeague}
+                leagueId={item.league.id}
+              />
+            ))}
             <League
               leagueName="liga bacana"
               leagueLogo="https://github.com/mateusrc-dev.png"
