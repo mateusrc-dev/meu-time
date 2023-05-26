@@ -1,14 +1,23 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { useContext, useEffect /* useState */ } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {
+  ButtonTeam,
   Container,
+  ContainerDetailsTeams,
   ContainerTeamDetails,
   HeaderTeam,
+  ImageTeam,
+  TableTeam,
 } from '../../styles/pages/detailsTeam'
-import { ArrowBendRightDown, ArrowBendUpLeft, SoccerBall } from 'phosphor-react'
+import {
+  ArrowBendRightDown,
+  ArrowBendUpLeft,
+  ArrowLeft,
+  ArrowRight,
+  SoccerBall,
+} from 'phosphor-react'
 import { OptionsSelectedContext } from '../../contexts/saveSelectedOptions'
-import Image from 'next/image'
 
 /* interface TeamProps {
   team: {
@@ -88,35 +97,35 @@ interface StatisticsProps {
       }
       minute: {
         '0-15': {
-          total: string | null
+          total: number | null
           percentage: string | null
         }
         '16-30': {
-          total: string | null
+          total: number | null
           percentage: string | null
         }
         '31-45': {
-          total: string | null
+          total: number | null
           percentage: string | null
         }
         '46-60': {
-          total: string | null
+          total: number | null
           percentage: string | null
         }
         '61-75': {
-          total: string | null
+          total: number | null
           percentage: string | null
         }
         '76-90': {
-          total: string | null
+          total: number | null
           percentage: string | null
         }
         '91-105': {
-          total: string | null
+          total: number | null
           percentage: string | null
         }
         '106-120': {
-          total: string | null
+          total: number | null
           percentage: string | null
         }
       }
@@ -133,10 +142,23 @@ export default function DetailsTime() {
   // const [teamDetails, setTeamDetails] = useState<TeamProps>()
   // const [players, setPlayers] = useState([])
   // const [teamStatistic, setTeamStatistic] = useState()
+  const [page, setPage] = useState<number>(1)
   const { query, push } = useRouter()
   const { league, season, country, userKey } = useContext(
     OptionsSelectedContext,
   )
+
+  function handlePagesAdd() {
+    if (page < 3) {
+      setPage((prevState) => prevState + 1)
+    }
+  }
+
+  function handlePagesSub() {
+    if (page > 1) {
+      setPage((prevState) => prevState - 1)
+    }
+  }
 
   function handleReturn() {
     push('/selectTeams')
@@ -216,18 +238,276 @@ export default function DetailsTime() {
             <h1>
               <SoccerBall /> Detalhes do time <ArrowBendRightDown />
             </h1>
-            <h1 onClick={handleReturn}>
-              <ArrowBendUpLeft /> retornar
-            </h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+              <p style={{ color: '#1d3557', fontStyle: 'italic' }}>
+                page {page} de 3
+              </p>
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <ButtonTeam onClick={() => handlePagesSub()}>
+                  <ArrowLeft color={'#1d3557'} />
+                </ButtonTeam>
+                <ButtonTeam onClick={() => handlePagesAdd()}>
+                  <ArrowRight color={'#1d3557'} />
+                </ButtonTeam>
+              </div>
+              <p onClick={handleReturn}>
+                <ArrowBendUpLeft /> retornar
+              </p>
+            </div>
           </HeaderTeam>
-          <ContainerTeamDetails>
-            <span>Nome do time</span>
-            <span>Fluminense</span>
-          </ContainerTeamDetails>
-          <h2>Nacionalidade do time</h2>
-          <h2>Cidade do time</h2>
-          <h2>Ano de fundação</h2>
-          <Image src="" alt="logo do time" width={100} height={80} />
+          {page === 1 && (
+            <>
+              <HeaderTeam>
+                <h1>
+                  <SoccerBall /> Informações sobre o time <ArrowBendRightDown />
+                </h1>
+              </HeaderTeam>
+              <ContainerDetailsTeams>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nome do time:
+                  </span>
+                  <span>Fluminense</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nacionalidade do time:
+                  </span>
+                  <span>Brasil</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Cidade do time:
+                  </span>
+                  <span>Rio de Janeiro</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Ano de fundação:
+                  </span>
+                  <span>1953</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <ImageTeam
+                    src="https://github.com/mateusrc-dev.png"
+                    alt="logo do time"
+                    width={175}
+                    height={80}
+                  />
+                </ContainerTeamDetails>
+              </ContainerDetailsTeams>
+              <HeaderTeam>
+                <h1>
+                  <SoccerBall /> Jogadores do time <ArrowBendRightDown />
+                </h1>
+              </HeaderTeam>
+              <ContainerDetailsTeams>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nome:
+                  </span>
+                  <span>Mateus Raimundo</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Idade:
+                  </span>
+                  <span>28</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nacionalidade:
+                  </span>
+                  <span>Brasil</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nome:
+                  </span>
+                  <span>Mateus Raimundo</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Idade:
+                  </span>
+                  <span>28</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nacionalidade:
+                  </span>
+                  <span>Brasil</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nome:
+                  </span>
+                  <span>Mateus Raimundo</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Idade:
+                  </span>
+                  <span>28</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nacionalidade:
+                  </span>
+                  <span>Brasil</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nome:
+                  </span>
+                  <span>Mateus Raimundo</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Idade:
+                  </span>
+                  <span>28</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nacionalidade:
+                  </span>
+                  <span>Brasil</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nome:
+                  </span>
+                  <span>Mateus Raimundo</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Idade:
+                  </span>
+                  <span>28</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nacionalidade:
+                  </span>
+                  <span>Brasil</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nome:
+                  </span>
+                  <span>Mateus Raimundo</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Idade:
+                  </span>
+                  <span>28</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nacionalidade:
+                  </span>
+                  <span>Brasil</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nome:
+                  </span>
+                  <span>Mateus Raimundo</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Idade:
+                  </span>
+                  <span>28</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nacionalidade:
+                  </span>
+                  <span>Brasil</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nome:
+                  </span>
+                  <span>Mateus Raimundo</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Idade:
+                  </span>
+                  <span>28</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Nacionalidade:
+                  </span>
+                  <span>Brasil</span>
+                </ContainerTeamDetails>
+              </ContainerDetailsTeams>
+            </>
+          )}
+          {page === 2 && (
+            <>
+              <HeaderTeam>
+                <h1>
+                  <SoccerBall /> Formação mais utilizada da temporada{' '}
+                  <ArrowBendRightDown />
+                </h1>
+              </HeaderTeam>
+              <ContainerDetailsTeams>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Formação:
+                  </span>
+                  <span>3-4-5-3</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Jogo:
+                  </span>
+                  <span>2</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Formação:
+                  </span>
+                  <span>3-4-5-3</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Jogo:
+                  </span>
+                  <span>2</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Formação:
+                  </span>
+                  <span>3-4-5-3</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Jogo:
+                  </span>
+                  <span>2</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Formação:
+                  </span>
+                  <span>3-4-5-3</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Jogo:
+                  </span>
+                  <span>2</span>
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Formação:
+                  </span>
+                  <span>3-4-5-3</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                    Jogo:
+                  </span>
+                  <span>2</span>
+                </ContainerTeamDetails>
+              </ContainerDetailsTeams>
+              <HeaderTeam>
+                <h1>
+                  <SoccerBall />
+                  Tabela de resultados <ArrowBendRightDown />
+                </h1>
+              </HeaderTeam>
+              <TableTeam>
+                <thead>
+                  <tr>
+                    <th>total de jogos</th>
+                    <th>total de vitórias</th>
+                    <th>total de derrotas</th>
+                    <th>total de empates</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>10</td>
+                    <td>5</td>
+                    <td>5</td>
+                    <td>0</td>
+                  </tr>
+                </tbody>
+              </TableTeam>
+            </>
+          )}
+          {page === 3 && (
+            <>
+              <h1>gráfico</h1>
+            </>
+          )}
         </Container>
       ) : (
         <div

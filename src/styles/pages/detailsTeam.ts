@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { styled } from '..'
 
 export const Container = styled('div', {
@@ -16,12 +17,40 @@ export const Container = styled('div', {
   },
 })
 
+export const ContainerDetailsTeams = styled('div', {
+  padding: '0.5rem 0rem',
+  marginTop: '2rem',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1.5rem',
+  maxHeight: '18rem',
+  flexWrap: 'wrap',
+  overflow: 'auto',
+  '&::-webkit-scrollbar': {
+    width: 15,
+  },
+  '&::-webkit-scrollbar-thumb': {
+    background: '$blue_100',
+    borderRadius: 10,
+    width: 0,
+    backgroundClip: 'padding-box',
+    border: '3px solid transparent',
+  },
+  '&::-webkit-scrollbar-thumb:hover': {
+    backgroundColor: '$blue_200',
+    width: 0,
+    borderRadius: 10,
+    backgroundClip: 'padding-box',
+    border: '3px solid transparent',
+  },
+})
+
 export const HeaderTeam = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
 
-  'h1:nth-child(2)': {
+  p: {
     color: '$red_100',
     textDecoration: 'none',
     cursor: 'pointer',
@@ -41,8 +70,58 @@ export const ContainerTeamDetails = styled('div', {
   alignItems: 'flex-start',
   gap: '0.5rem',
   backgroundColor: '$blue_200',
-  width: '10rem',
+  width: '15rem',
   padding: '0.5rem 2rem',
   borderRadius: '5px',
-  boxShadow: '6px 6px 5px rgba(0, 0, 0, 0.5)',
+  boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.5)',
+})
+
+export const ImageTeam = styled(Image, {
+  border: '4px solid $blue_100',
+  borderRadius: '5px',
+})
+
+export const ButtonTeam = styled('button', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '0.5rem',
+  border: 'none',
+  borderRadius: '5px',
+  backgroundColor: '#f1faee',
+  cursor: 'pointer',
+  '&:hover': {
+    filter: 'brightness(0.8)',
+  },
+})
+
+export const TableTeam = styled('table', {
+  margin: '20px auto',
+  border: '1px solid black',
+  minWidth: '500px',
+  minHeight: '150px',
+  padding: '5px 2.5px',
+  backgroundColor: 'rgb(217, 237, 255)',
+  boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.5)',
+  borderSpacing: '5px',
+
+  thead: {
+    backgroundColor: 'rgb(0, 148, 148)',
+    color: 'white',
+  },
+
+  'thead tr th': {
+    border: '1px solid black',
+    padding: '5px',
+  },
+
+  tbody: {
+    textAlign: 'center',
+    backgroundColor: 'blueviolet',
+    color: 'white',
+  },
+
+  'tbody tr td': {
+    border: '1px solid black',
+  },
 })
