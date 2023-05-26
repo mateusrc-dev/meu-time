@@ -14,7 +14,7 @@ import { OptionsSelectedContext } from '../contexts/saveSelectedOptions'
 
 export default function SelectSeasons() {
   const [seasons, setSeasons] = useState<number[]>([])
-  const { handleSeason } = useContext(OptionsSelectedContext)
+  const { handleSeason, userKey, country } = useContext(OptionsSelectedContext)
   const router = useRouter()
 
   function handleClickSeason(season: number) {
@@ -42,27 +42,53 @@ export default function SelectSeasons() {
     handleFindCountries()
   }, [])
 
+  useEffect(() => {
+    if (userKey === null) {
+      router.push('/login')
+    }
+
+    if (country === null) {
+      router.push('/selectCountries')
+    }
+  }, [userKey, router, country])
+
   return (
-    <Container>
-      <HeaderSeasons>
-        <h1>
-          <SoccerBall /> Escolha uma temporada <ArrowBendRightDown />
-        </h1>
-        <h1 onClick={handleReturn}>
-          <ArrowBendUpLeft /> retornar
-        </h1>
-      </HeaderSeasons>
-      <ContainerSeasons>
-        {seasons.map((item) => (
-          <Season
-            key={String(item)}
-            season={item}
-            handleClick={handleClickSeason}
-          />
-        ))}
-        <Season season={2023} handleClick={handleClickSeason} />
-      </ContainerSeasons>
-      <MultiStep currentStep={2} size={4} />
-    </Container>
+    <>
+      {country !== null && userKey !== null ? (
+        <Container>
+          <HeaderSeasons>
+            <h1>
+              <SoccerBall /> Escolha uma temporada <ArrowBendRightDown />
+            </h1>
+            <h1 onClick={handleReturn}>
+              <ArrowBendUpLeft /> retornar
+            </h1>
+          </HeaderSeasons>
+          <ContainerSeasons>
+            {seasons.map((item) => (
+              <Season
+                key={String(item)}
+                season={item}
+                handleClick={handleClickSeason}
+              />
+            ))}
+            <Season season={2023} handleClick={handleClickSeason} />
+          </ContainerSeasons>
+          <MultiStep currentStep={2} size={4} />
+        </Container>
+      ) : (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '20rem',
+            textAlign: 'center',
+          }}
+        >
+          <h1>Você não está logado ou ainda não selecionou um país!</h1>
+        </div>
+      )}
+    </>
   )
 }

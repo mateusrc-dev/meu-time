@@ -47,31 +47,53 @@ export default function SelectCountries() {
     handleFindCountries()
   }, [])
 
+  useEffect(() => {
+    if (userKey === null) {
+      router.push('/login')
+    }
+  }, [userKey, router, handleCountry])
+
   return (
-    <Container>
-      <h1>
-        <SoccerBall /> Escolha o país do seu time <ArrowBendRightDown />
-      </h1>
-      <ContainerCountries>
-        {countries &&
-          countries.map(
-            (item) =>
-              item.flag && (
-                <Country
-                  key={String(item.code)}
-                  country={item.name}
-                  image={item.flag}
-                  handleClick={handleClickCountry}
-                />
-              ),
-          )}
-        <Country
-          country="Mateus"
-          image="https://github.com/mateusrc-dev.png"
-          handleClick={handleClickCountry}
-        />
-      </ContainerCountries>
-      <MultiStep currentStep={1} size={4} />
-    </Container>
+    <>
+      {userKey !== null ? (
+        <Container>
+          <h1>
+            <SoccerBall /> Escolha o país do seu time <ArrowBendRightDown />
+          </h1>
+          <ContainerCountries>
+            {countries &&
+              countries.map(
+                (item) =>
+                  item.flag && (
+                    <Country
+                      key={String(item.code)}
+                      country={item.name}
+                      image={item.flag}
+                      handleClick={handleClickCountry}
+                    />
+                  ),
+              )}
+            <Country
+              country="Mateus"
+              image="https://github.com/mateusrc-dev.png"
+              handleClick={handleClickCountry}
+            />
+          </ContainerCountries>
+          <MultiStep currentStep={1} size={4} />
+        </Container>
+      ) : (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '20rem',
+            textAlign: 'center',
+          }}
+        >
+          <h1>Você não está logado!</h1>
+        </div>
+      )}
+    </>
   )
 }

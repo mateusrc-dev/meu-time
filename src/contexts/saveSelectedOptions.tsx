@@ -22,10 +22,10 @@ interface OptionsSelectedProviderProps {
 export function OptionsSelectedProvider({
   children,
 }: OptionsSelectedProviderProps) {
-  const [country, setCountry] = useState<string | null>(null)
-  const [season, setSeason] = useState<number | null>(null)
-  const [league, setLeague] = useState<number | null>(null)
-  const [userKey, setUserKey] = useState<string | null>(null)
+  const [country, setCountry] = useState<string | null>('')
+  const [season, setSeason] = useState<number | null>(0)
+  const [league, setLeague] = useState<number | null>(0)
+  const [userKey, setUserKey] = useState<string | null>('')
 
   useEffect(() => {
     const storedCountryJSON = localStorage.getItem('@meu-time:country')
