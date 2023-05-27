@@ -126,6 +126,11 @@ export default function SelectCountries() {
                   ),
               )}
           </ContainerCountries>
+          <Country
+            country={'Brasil'}
+            image={'https://github.com/mateusrc-dev.png'}
+            handleClick={handleClickCountry}
+          />
           <MultiStep currentStep={1} size={4} />
         </Container>
       ) : (
