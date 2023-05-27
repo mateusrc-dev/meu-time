@@ -2,5 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/detailsTeam/[id]": "pages/detailsTeam/[id].js"
+  "/selectCountries": "pages/selectCountries.js",
+  "/selectSeasons": "pages/selectSeasons.js",
+  "/selectLeagues": "pages/selectLeagues.js",
+  "/selectTeams": "pages/selectTeams.js",
+  "/login": "pages/login.js"
 }

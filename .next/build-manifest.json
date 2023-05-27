@@ -25,10 +25,30 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/detailsTeam/[id]": [
+    "/login": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/detailsTeam/[id].js"
+      "static/chunks/pages/login.js"
+    ],
+    "/selectCountries": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/selectCountries.js"
+    ],
+    "/selectLeagues": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/selectLeagues.js"
+    ],
+    "/selectSeasons": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/selectSeasons.js"
+    ],
+    "/selectTeams": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/selectTeams.js"
     ]
   },
   "ampFirstPages": []

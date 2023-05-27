@@ -99,7 +99,16 @@ export default function SelectCountries() {
           <h1>
             <SoccerBall /> Escolha o país do seu time <ArrowBendRightDown />
           </h1>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <div
+            className="pagesControl"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              marginTop: '0.5rem',
+            }}
+          >
+            <SoccerBall color={'#1d3557'} />
             <p style={{ color: '#1d3557', fontStyle: 'italic' }}>
               page {page} de {numberPages}
             </p>
@@ -125,12 +134,13 @@ export default function SelectCountries() {
                     />
                   ),
               )}
+            <Country
+              country={'Brasil'}
+              image={'https://github.com/mateusrc-dev.png'}
+              handleClick={handleClickCountry}
+            />
           </ContainerCountries>
-          <Country
-            country={'Brasil'}
-            image={'https://github.com/mateusrc-dev.png'}
-            handleClick={handleClickCountry}
-          />
+
           <MultiStep currentStep={1} size={4} />
         </Container>
       ) : (

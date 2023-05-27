@@ -14,7 +14,23 @@ const changeColor = keyframes({
   },
 })
 
-export const MultiStepContainer = styled('div', {})
+const downTop = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translateY(2rem)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'translateY(0)',
+  },
+})
+
+export const MultiStepContainer = styled('div', {
+  animationName: `${downTop}`,
+  animationDirection: 'normal',
+  animationDuration: '1.5s',
+  animationTimingFunction: 'ease-out',
+})
 
 export const Steps = styled('div', {
   display: 'grid',

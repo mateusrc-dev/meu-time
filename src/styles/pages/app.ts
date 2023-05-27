@@ -6,6 +6,17 @@ const isRotating = keyframes({
   },
 })
 
+const downTop = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translateY(-3rem)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'translateY(0)',
+  },
+})
+
 export const Container = styled('div', {
   display: 'flex',
 })
@@ -17,6 +28,10 @@ export const Body = styled('div', {
   height: 'calc(100vh - 4rem)',
   backgroundColor: '$blue_300',
   borderRadius: '5px',
+  '@media (max-width: 600px)': {
+    margin: '2rem 0rem',
+    padding: '2rem 0rem',
+  },
 })
 
 export const Header = styled('div', {
@@ -27,6 +42,10 @@ export const Header = styled('div', {
   padding: '0.5rem 2rem',
   borderRadius: '10px',
   boxShadow: '4px 4px 5px rgba(0, 0, 0, 0.5)',
+  animationName: `${downTop}`,
+  animationDirection: 'normal',
+  animationDuration: '1.5s',
+  animationTimingFunction: 'ease-out',
 
   h1: {
     display: 'flex',

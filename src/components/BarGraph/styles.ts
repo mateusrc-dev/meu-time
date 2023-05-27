@@ -46,3 +46,29 @@ export const FragmentBar = styled('div', {
     },
   },
 })
+
+export const ContainerAllBar = styled('div', {
+  borderRadius: '5px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem',
+  marginTop: '0.5rem',
+  overflow: 'auto',
+  '&::-webkit-scrollbar': {
+    width: 15,
+  },
+  '&::-webkit-scrollbar-thumb': {
+    background: '$blue_100',
+    borderRadius: 10,
+    width: 0,
+    backgroundClip: 'padding-box',
+    border: '3px solid transparent',
+  },
+  '&::-webkit-scrollbar-thumb:hover': {
+    backgroundColor: '$blue_200',
+    width: 0,
+    borderRadius: 10,
+    backgroundClip: 'padding-box',
+    border: '3px solid transparent',
+  },
+})

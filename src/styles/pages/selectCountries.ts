@@ -1,4 +1,26 @@
-import { styled } from '..'
+import { keyframes, styled } from '..'
+
+const scaleAnimation = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'scale(0.9)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'scale(1)',
+  },
+})
+
+const leftAnimation = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translateX(-3rem)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'translateX(0)',
+  },
+})
 
 export const Container = styled('div', {
   display: 'flex',
@@ -13,6 +35,17 @@ export const Container = styled('div', {
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
+    animationName: `${leftAnimation}`,
+    animationDirection: 'normal',
+    animationDuration: '1.5s',
+    animationTimingFunction: 'ease-out',
+  },
+
+  'div.pagesControl': {
+    animationName: `${leftAnimation}`,
+    animationDirection: 'normal',
+    animationDuration: '1.5s',
+    animationTimingFunction: 'ease-out',
   },
 })
 
@@ -25,6 +58,10 @@ export const ContainerCountries = styled('div', {
   gap: '1.5rem',
   flexWrap: 'wrap',
   overflow: 'auto',
+  animationName: `${scaleAnimation}`,
+  animationDirection: 'normal',
+  animationDuration: '1.5s',
+  animationTimingFunction: 'ease-out',
   '&::-webkit-scrollbar': {
     width: 15,
   },

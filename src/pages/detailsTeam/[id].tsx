@@ -19,6 +19,7 @@ import {
 } from 'phosphor-react'
 import { OptionsSelectedContext } from '../../contexts/saveSelectedOptions'
 import { BarGraph } from '../../components/BarGraph'
+import { ContainerAllBar } from '../../components/BarGraph/styles'
 
 interface TeamProps {
   team: {
@@ -433,14 +434,7 @@ export default function DetailsTime() {
                       <ArrowBendRightDown />
                     </h1>
                   </HeaderTeam>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '0.5rem',
-                      marginTop: '0.5rem',
-                    }}
-                  >
+                  <ContainerAllBar>
                     <ContainerTeamDetails>
                       <div
                         style={{
@@ -1025,7 +1019,7 @@ export default function DetailsTime() {
                         )}
                       />
                     </ContainerTeamDetails>
-                  </div>
+                  </ContainerAllBar>
                 </>
               )}
             </Container>
