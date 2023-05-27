@@ -15,7 +15,7 @@ const changeColor = keyframes({
 })
 
 export const BarGraphContainer = styled('div', {
-  width: '60rem',
+  width: '100%',
 })
 
 export const Bar = styled('div', {

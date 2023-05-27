@@ -53,7 +53,7 @@ export default function SelectLeagues() {
   useEffect(() => {
     async function handleFindLeagues() {
       const res = await axios.get(
-        `https://v3.football.api-sports.io/leagues?country=${country}&season=${season}`,
+        `https://v3.football.api-sports.io/leagues?season=${season}&country=${country}`,
         {
           headers: {
             'x-rapidapi-key': `${userKey}`,

@@ -20,7 +20,7 @@ import {
 import { OptionsSelectedContext } from '../../contexts/saveSelectedOptions'
 import { BarGraph } from '../../components/BarGraph'
 
-/* interface TeamProps {
+interface TeamProps {
   team: {
     code: string
     country: string
@@ -39,7 +39,7 @@ import { BarGraph } from '../../components/BarGraph'
     name: string
     surface: string
   }
-} 
+}
 
 interface PlayersProps {
   age: number
@@ -60,29 +60,26 @@ interface PlayersProps {
 }
 
 interface StatisticsProps {
-  biggest: {
-    goals: {
-      against: {
-        away: number | null
-        home: number | null
-      }
-      for: {
-        away: number | null
-        home: number | null
-      }
+  fixtures: {
+    draws: {
+      home: number
+      away: number
+      total: number
     }
     loses: {
-      away: number | null
-      home: number | null
+      home: number
+      away: number
+      total: number
     }
-    streak: {
-      draws: number | null
-      loses: number | null
-      wins: number | null
+    played: {
+      home: number
+      away: number
+      total: number
     }
     wins: {
-      home: number | null
-      away: number | null
+      home: number
+      away: number
+      total: number
     }
   }
   lineups: {
@@ -137,12 +134,12 @@ interface StatisticsProps {
       }
     }
   }
-} */
+}
 
 export default function DetailsTime() {
-  // const [teamDetails, setTeamDetails] = useState<TeamProps>()
-  // const [players, setPlayers] = useState([])
-  // const [teamStatistic, setTeamStatistic] = useState()
+  const [teamDetails, setTeamDetails] = useState<TeamProps>()
+  const [players, setPlayers] = useState<PlayersProps[]>([])
+  const [teamStatistic, setTeamStatistic] = useState<StatisticsProps>()
   const [page, setPage] = useState<number>(1)
   const { query, push } = useRouter()
   const { league, season, country, userKey } = useContext(
@@ -195,7 +192,7 @@ export default function DetailsTime() {
         },
       )
       console.log(res.data)
-      // setTeamDetails(res.data.response)
+      setTeamDetails(res.data.response)
     }
     async function handleGetPlayers() {
       const res = await axios.get(
@@ -208,7 +205,7 @@ export default function DetailsTime() {
         },
       )
       console.log(res.data)
-      // setPlayers(res.data.response)
+      setPlayers(res.data.response)
     }
     async function handleGetTeamStatistic() {
       const res = await axios.get(
@@ -221,7 +218,7 @@ export default function DetailsTime() {
         },
       )
       console.log(res.data)
-      // setTeamStatistic(res.data.response)
+      setTeamStatistic(res.data.response)
     }
     handleFindDetailsTeam()
     handleGetPlayers()
@@ -268,29 +265,23 @@ export default function DetailsTime() {
                   <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
                     Nome do time:
                   </span>
-                  <span>Fluminense</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nacionalidade do time:
-                  </span>
-                  <span>Brasil</span>
+                  <span>{teamDetails.team.name}</span>
                 </ContainerTeamDetails>
                 <ContainerTeamDetails>
                   <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
                     Cidade do time:
                   </span>
-                  <span>Rio de Janeiro</span>
+                  <span>{teamDetails.team.country}</span>
                 </ContainerTeamDetails>
                 <ContainerTeamDetails>
                   <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
                     Ano de fundação:
                   </span>
-                  <span>1953</span>
+                  <span>{teamDetails.team.founded}</span>
                 </ContainerTeamDetails>
                 <ContainerTeamDetails>
                   <ImageTeam
-                    src="https://github.com/mateusrc-dev.png"
+                    src={teamDetails.team.logo}
                     alt="logo do time"
                     width={175}
                     height={80}
@@ -303,118 +294,22 @@ export default function DetailsTime() {
                 </h1>
               </HeaderTeam>
               <ContainerDetailsTeams>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nome:
-                  </span>
-                  <span>Mateus Raimundo</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Idade:
-                  </span>
-                  <span>28</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nacionalidade:
-                  </span>
-                  <span>Brasil</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nome:
-                  </span>
-                  <span>Mateus Raimundo</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Idade:
-                  </span>
-                  <span>28</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nacionalidade:
-                  </span>
-                  <span>Brasil</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nome:
-                  </span>
-                  <span>Mateus Raimundo</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Idade:
-                  </span>
-                  <span>28</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nacionalidade:
-                  </span>
-                  <span>Brasil</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nome:
-                  </span>
-                  <span>Mateus Raimundo</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Idade:
-                  </span>
-                  <span>28</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nacionalidade:
-                  </span>
-                  <span>Brasil</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nome:
-                  </span>
-                  <span>Mateus Raimundo</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Idade:
-                  </span>
-                  <span>28</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nacionalidade:
-                  </span>
-                  <span>Brasil</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nome:
-                  </span>
-                  <span>Mateus Raimundo</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Idade:
-                  </span>
-                  <span>28</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nacionalidade:
-                  </span>
-                  <span>Brasil</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nome:
-                  </span>
-                  <span>Mateus Raimundo</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Idade:
-                  </span>
-                  <span>28</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nacionalidade:
-                  </span>
-                  <span>Brasil</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nome:
-                  </span>
-                  <span>Mateus Raimundo</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Idade:
-                  </span>
-                  <span>28</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Nacionalidade:
-                  </span>
-                  <span>Brasil</span>
-                </ContainerTeamDetails>
+                {players.map((item) => (
+                  <ContainerTeamDetails key={String(item.id)}>
+                    <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                      Nome:
+                    </span>
+                    <span>{item.name}</span>
+                    <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                      Idade:
+                    </span>
+                    <span>{item.age}</span>
+                    <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                      Nacionalidade:
+                    </span>
+                    <span>{item.nationality}</span>
+                  </ContainerTeamDetails>
+                ))}
               </ContainerDetailsTeams>
             </>
           )}
@@ -427,56 +322,18 @@ export default function DetailsTime() {
                 </h1>
               </HeaderTeam>
               <ContainerDetailsTeams>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Formação:
-                  </span>
-                  <span>3-4-5-3</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Jogo:
-                  </span>
-                  <span>2</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Formação:
-                  </span>
-                  <span>3-4-5-3</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Jogo:
-                  </span>
-                  <span>2</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Formação:
-                  </span>
-                  <span>3-4-5-3</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Jogo:
-                  </span>
-                  <span>2</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Formação:
-                  </span>
-                  <span>3-4-5-3</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Jogo:
-                  </span>
-                  <span>2</span>
-                </ContainerTeamDetails>
-                <ContainerTeamDetails>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Formação:
-                  </span>
-                  <span>3-4-5-3</span>
-                  <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                    Jogo:
-                  </span>
-                  <span>2</span>
-                </ContainerTeamDetails>
+                {teamStatistic.lineups.map((item) => (
+                  <ContainerTeamDetails key={String(item.played)}>
+                    <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                      Formação:
+                    </span>
+                    <span>{item.formation}</span>
+                    <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                      Jogo:
+                    </span>
+                    <span>{item.played}</span>
+                  </ContainerTeamDetails>
+                ))}
               </ContainerDetailsTeams>
               <HeaderTeam>
                 <h1>
@@ -495,10 +352,10 @@ export default function DetailsTime() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>10</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>0</td>
+                    <td>{teamStatistic.fixtures.played.total}</td>
+                    <td>{teamStatistic.fixtures.wins.total}</td>
+                    <td>{teamStatistic.fixtures.loses.total}</td>
+                    <td>{teamStatistic.fixtures.draws.total}</td>
                   </tr>
                 </tbody>
               </TableTeam>
@@ -506,8 +363,514 @@ export default function DetailsTime() {
           )}
           {page === 3 && (
             <>
-              <h1>gráfico</h1>
-              <BarGraph size={100} currentBar={60} />
+              <HeaderTeam>
+                <h1>
+                  <SoccerBall /> Gols marcados por tempo de jogo{' '}
+                  <ArrowBendRightDown />
+                </h1>
+              </HeaderTeam>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.5rem',
+                  marginTop: '0.5rem',
+                }}
+              >
+                <ContainerTeamDetails>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1.5rem',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        minuto:
+                      </span>
+                      <span>0-15</span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        total:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['0-15'].total}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        porcentagem:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['0-15'].percentage}
+                      </span>
+                    </div>
+                  </div>
+                  <BarGraph
+                    size={100}
+                    currentBar={Math.round(
+                      Number(
+                        String(
+                          teamStatistic.goals.against.minute['0-15'].percentage,
+                        ).replace('%', ''),
+                      ),
+                    )}
+                  />
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1.5rem',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        minuto:
+                      </span>
+                      <span>16-30</span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        total:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['16-30'].total}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        porcentagem:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['16-30'].percentage}
+                      </span>
+                    </div>
+                  </div>
+                  <BarGraph
+                    size={100}
+                    currentBar={Math.round(
+                      Number(
+                        String(
+                          teamStatistic.goals.against.minute['16-30']
+                            .percentage,
+                        ).replace('%', ''),
+                      ),
+                    )}
+                  />
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1.5rem',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        minuto:
+                      </span>
+                      <span>31-45</span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        total:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['31-45'].total}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        porcentagem:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['31-45'].percentage}
+                      </span>
+                    </div>
+                  </div>
+                  <BarGraph
+                    size={100}
+                    currentBar={Math.round(
+                      Number(
+                        String(
+                          teamStatistic.goals.against.minute['31-45']
+                            .percentage,
+                        ).replace('%', ''),
+                      ),
+                    )}
+                  />
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1.5rem',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        minuto:
+                      </span>
+                      <span>46-60</span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        total:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['46-60'].total}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        porcentagem:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['46-60'].percentage}
+                      </span>
+                    </div>
+                  </div>
+                  <BarGraph
+                    size={100}
+                    currentBar={Math.round(
+                      Number(
+                        String(
+                          teamStatistic.goals.against.minute['46-60']
+                            .percentage,
+                        ).replace('%', ''),
+                      ),
+                    )}
+                  />
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1.5rem',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        minuto:
+                      </span>
+                      <span>61-75</span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        total:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['61-75'].total}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        porcentagem:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['61-75'].percentage}
+                      </span>
+                    </div>
+                  </div>
+                  <BarGraph
+                    size={100}
+                    currentBar={Math.round(
+                      Number(
+                        String(
+                          teamStatistic.goals.against.minute['61-75']
+                            .percentage,
+                        ).replace('%', ''),
+                      ),
+                    )}
+                  />
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1.5rem',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        minuto:
+                      </span>
+                      <span>76-90</span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        total:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['76-90'].total}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        porcentagem:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['76-90'].percentage}
+                      </span>
+                    </div>
+                  </div>
+                  <BarGraph
+                    size={100}
+                    currentBar={Math.round(
+                      Number(
+                        String(
+                          teamStatistic.goals.against.minute['76-90']
+                            .percentage,
+                        ).replace('%', ''),
+                      ),
+                    )}
+                  />
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1.5rem',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        minuto:
+                      </span>
+                      <span>91-105</span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        total:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['91-105'].total}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        porcentagem:
+                      </span>
+                      <span>
+                        {
+                          teamStatistic.goals.against.minute['91-105']
+                            .percentage
+                        }
+                      </span>
+                    </div>
+                  </div>
+                  <BarGraph
+                    size={100}
+                    currentBar={Math.round(
+                      Number(
+                        String(
+                          teamStatistic.goals.against.minute['91-105']
+                            .percentage,
+                        ).replace('%', ''),
+                      ),
+                    )}
+                  />
+                </ContainerTeamDetails>
+                <ContainerTeamDetails>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1.5rem',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        minuto:
+                      </span>
+                      <span>106-120</span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        total:
+                      </span>
+                      <span>
+                        {teamStatistic.goals.against.minute['106-120'].total}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                      }}
+                    >
+                      <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
+                        porcentagem:
+                      </span>
+                      <span>
+                        {
+                          teamStatistic.goals.against.minute['106-120']
+                            .percentage
+                        }
+                      </span>
+                    </div>
+                  </div>
+                  <BarGraph
+                    size={100}
+                    currentBar={Math.round(
+                      Number(
+                        String(
+                          teamStatistic.goals.against.minute['106-120']
+                            .percentage,
+                        ).replace('%', ''),
+                      ),
+                    )}
+                  />
+                </ContainerTeamDetails>
+              </div>
             </>
           )}
         </Container>
