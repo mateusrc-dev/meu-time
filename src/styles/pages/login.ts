@@ -1,4 +1,15 @@
-import { styled } from '..'
+import { keyframes, styled } from '..'
+
+const downTop = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translateY(3rem)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'translateY(0)',
+  },
+})
 
 export const Container = styled('div', {
   display: 'flex',
@@ -17,6 +28,10 @@ export const Body = styled('div', {
   backgroundColor: '$blue_200',
   borderRadius: '5px',
   boxShadow: '4px 4px 5px rgba(0, 0, 0, 0.5)',
+  animationName: `${downTop}`,
+  animationDirection: 'normal',
+  animationDuration: '1.5s',
+  animationTimingFunction: 'ease-out',
 })
 
 export const Input = styled('input', {
@@ -54,5 +69,10 @@ export const Button = styled('button', {
     borderColor: '$white_100',
     backgroundColor: '$blue_200',
     color: '$white_100',
+  },
+
+  '&:disabled': {
+    filter: 'brightness(0.8)',
+    cursor: 'not-allowed',
   },
 })
