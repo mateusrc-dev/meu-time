@@ -96,8 +96,8 @@ export default function Login() {
             nesse site (API-FOOTBALL)
           </a>{' '}
           e cole a api-key fornecida dentro da sua conta no espaço acima. É
-          possível fazer apenas 100 pedidos por dia e 10 pedidos por minutos,
-          após atingidos esses limites os dados dos times, temporadas, ligas,
+          possível fazer apenas 100 pedidos por dia e 10 pedidos por minuto,
+          após atingidos esses limites os dados dos times, temporadas, ligas e
           países param de ser enviados.
         </h1>
       </div>
