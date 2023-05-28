@@ -14,23 +14,27 @@ const downTop = keyframes({
 export const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
+  gap: '5rem',
+  heigh: '100%',
+})
+
+export const ContainerBody = styled('div', {
+  display: 'flex',
+  alignItem: 'center',
   justifyContent: 'center',
-  marginTop: '5rem',
 })
 
 export const Body = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  margin: '2rem',
   padding: '1rem',
   backgroundColor: '$blue_200',
   borderRadius: '5px',
   boxShadow: '4px 4px 5px rgba(0, 0, 0, 0.5)',
   animationName: `${downTop}`,
   animationDirection: 'normal',
-  animationDuration: '1.5s',
+  animationDuration: '1s',
   animationTimingFunction: 'ease-out',
 })
 

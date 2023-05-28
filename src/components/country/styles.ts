@@ -28,6 +28,7 @@ export const Body = styled('div', {
     fontStyle: 'italic',
     fontSize: '1rem',
     textDecoration: 'underline',
+    color: '$white_100',
   },
 })
 

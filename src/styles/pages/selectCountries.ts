@@ -25,7 +25,7 @@ const leftAnimation = keyframes({
 export const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  height: 'calc(100% - 4rem)',
+  height: '100%',
 
   h1: {
     marginTop: '2rem',
@@ -37,14 +37,14 @@ export const Container = styled('div', {
     gap: '0.5rem',
     animationName: `${leftAnimation}`,
     animationDirection: 'normal',
-    animationDuration: '1.5s',
+    animationDuration: '1s',
     animationTimingFunction: 'ease-out',
   },
 
   'div.pagesControl': {
     animationName: `${leftAnimation}`,
     animationDirection: 'normal',
-    animationDuration: '1.5s',
+    animationDuration: '1s',
     animationTimingFunction: 'ease-out',
   },
 })
@@ -60,7 +60,7 @@ export const ContainerCountries = styled('div', {
   overflow: 'auto',
   animationName: `${scaleAnimation}`,
   animationDirection: 'normal',
-  animationDuration: '1.5s',
+  animationDuration: '1s',
   animationTimingFunction: 'ease-out',
   '&::-webkit-scrollbar': {
     width: 15,

@@ -1,13 +1,38 @@
 import Image from 'next/image'
-import { styled } from '..'
+import { keyframes, styled } from '..'
+
+const scaleAnimation = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'scale(0.9)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'scale(1)',
+  },
+})
+
+const leftAnimation = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translateX(-3rem)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'translateX(0)',
+  },
+})
 
 export const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  height: 'calc(100% - 4rem)',
+  height: '100%',
+  animationName: `${scaleAnimation}`,
+  animationDirection: 'normal',
+  animationDuration: '1s',
+  animationTimingFunction: 'ease-out',
 
-  h1: {
-    marginTop: '2rem',
+  p: {
     fontSize: '1rem',
     color: '$blue_100',
     textDecoration: 'underline',
@@ -18,12 +43,11 @@ export const Container = styled('div', {
 })
 
 export const ContainerDetailsTeams = styled('div', {
-  padding: '0.5rem 0rem',
-  marginTop: '2rem',
+  padding: '0rem 0rem',
   display: 'flex',
   alignItems: 'center',
   gap: '1.5rem',
-  maxHeight: '18rem',
+  height: '15rem',
   flexWrap: 'wrap',
   overflow: 'auto',
   '&::-webkit-scrollbar': {
@@ -49,9 +73,14 @@ export const HeaderTeam = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  animationName: `${leftAnimation}`,
+  animationDirection: 'normal',
+  animationDuration: '1s',
+  animationTimingFunction: 'ease-out',
+  marginTop: '0.5rem',
 
   p: {
-    color: '$red_100',
+    color: '$blue_100',
     textDecoration: 'none',
     cursor: 'pointer',
     display: 'flex',
@@ -73,9 +102,13 @@ export const ContainerTeamDetails = styled('div', {
   backgroundColor: '$blue_200',
   minWidth: '15rem',
   minHeight: '6.5rem',
-  padding: '0.5rem 2rem',
+  padding: '0.5rem 0.5rem',
   borderRadius: '5px',
   boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.5)',
+  animationName: `${leftAnimation}`,
+  animationDirection: 'normal',
+  animationDuration: '1s',
+  animationTimingFunction: 'ease-out',
 })
 
 export const ImageTeam = styled(Image, {
@@ -107,6 +140,10 @@ export const TableTeam = styled('table', {
   boxShadow: '5px 5px 5px rgba(0, 0, 0, 0.5)',
   borderSpacing: '5px',
   borderRadius: '5px',
+  animationName: `${leftAnimation}`,
+  animationDirection: 'normal',
+  animationDuration: '1s',
+  animationTimingFunction: 'ease-out',
 
   thead: {
     backgroundColor: '$blue_300',

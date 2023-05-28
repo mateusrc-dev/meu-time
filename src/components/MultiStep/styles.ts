@@ -28,8 +28,9 @@ const downTop = keyframes({
 export const MultiStepContainer = styled('div', {
   animationName: `${downTop}`,
   animationDirection: 'normal',
-  animationDuration: '1.5s',
+  animationDuration: '1s',
   animationTimingFunction: 'ease-out',
+  height: '0rem',
 })
 
 export const Steps = styled('div', {

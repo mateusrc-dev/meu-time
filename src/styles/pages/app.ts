@@ -37,6 +37,7 @@ export const Body = styled('div', {
 export const Header = styled('div', {
   display: 'flex',
   alignItems: 'center',
+  width: '100%',
   justifyContent: 'space-between',
   backgroundColor: '$white_100',
   padding: '0.5rem 2rem',
@@ -44,10 +45,10 @@ export const Header = styled('div', {
   boxShadow: '4px 4px 5px rgba(0, 0, 0, 0.5)',
   animationName: `${downTop}`,
   animationDirection: 'normal',
-  animationDuration: '1.5s',
+  animationDuration: '1s',
   animationTimingFunction: 'ease-out',
 
-  h1: {
+  h2: {
     display: 'flex',
     fontStyle: 'italic',
     fontWeight: 'bold',
@@ -77,4 +78,11 @@ export const SignOutContainer = styled('button', {
   '&:hover': {
     filter: 'brightness(4)',
   },
+})
+
+export const ContainerModeTheme = styled('div', {
+  position: 'absolute',
+  top: '2.3rem',
+  right: '2.3rem',
+  cursor: 'pointer',
 })

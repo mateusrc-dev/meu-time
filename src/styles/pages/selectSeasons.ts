@@ -1,9 +1,31 @@
-import { styled } from '..'
+import { keyframes, styled } from '..'
+
+const scaleAnimation = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'scale(0.9)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'scale(1)',
+  },
+})
+
+const leftAnimation = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'translateX(-3rem)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'translateX(0)',
+  },
+})
 
 export const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  height: 'calc(100% - 4rem)',
+  height: '100%',
 
   h1: {
     marginTop: '2rem',
@@ -20,6 +42,10 @@ export const HeaderSeasons = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  animationName: `${leftAnimation}`,
+  animationDirection: 'normal',
+  animationDuration: '1s',
+  animationTimingFunction: 'ease-out',
 
   'h1:nth-child(2)': {
     color: '$red_100',
@@ -44,6 +70,10 @@ export const ContainerSeasons = styled('div', {
   gap: '1.5rem',
   flexWrap: 'wrap',
   overflow: 'auto',
+  animationName: `${scaleAnimation}`,
+  animationDirection: 'normal',
+  animationDuration: '1s',
+  animationTimingFunction: 'ease-out',
   '&::-webkit-scrollbar': {
     width: 15,
   },

@@ -7,11 +7,16 @@ import {
   ArrowBendRightDown,
   ArrowLeft,
   ArrowRight,
+  SignOut,
   SoccerBall,
 } from 'phosphor-react'
 import { useRouter } from 'next/router'
 import { OptionsSelectedContext } from '../contexts/saveSelectedOptions'
 import { ButtonTeam } from '../styles/pages/detailsTeam'
+import ShowLoading from '../components/Loading'
+import { Header, LogoImage, SignOutContainer } from '../styles/pages/app'
+import Image from 'next/image'
+import logoImg from '../assets/ball.svg'
 
 interface CountryProps {
   name: string
@@ -21,14 +26,22 @@ interface CountryProps {
 
 export default function SelectCountries() {
   const [countries, setCountries] = useState<CountryProps[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
   const [countriesCurrent, setCountriesCurrent] = useState<CountryProps[]>([])
   const [numberPages, setNumberPages] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
   const [pageStartCurrent, setPageStartCurrent] = useState<number>(0)
   const [pageEndCurrent, setPageEndCurrent] = useState<number>(19)
-  const { handleCountry, country, league, season, userKey } = useContext(
-    OptionsSelectedContext,
-  )
+  const {
+    handleCountry,
+    handleLeague,
+    handleSeason,
+    handleUserKey,
+    country,
+    league,
+    season,
+    userKey,
+  } = useContext(OptionsSelectedContext)
   const router = useRouter()
 
   function handleClickCountry(country: string) {
@@ -36,10 +49,22 @@ export default function SelectCountries() {
     router.push('/selectSeasons')
   }
 
+  console.log(userKey)
   console.log(country)
   console.log(league)
-  console.log(pageEndCurrent)
   console.log(season)
+
+  function handleSignOut() {
+    localStorage.removeItem('@meu-time:league')
+    localStorage.removeItem('@meu-time:country')
+    localStorage.removeItem('@meu-time:season')
+    localStorage.removeItem('@meu-time:userKey')
+    handleCountry(null)
+    handleLeague(null)
+    handleSeason(null)
+    handleUserKey(null)
+    router.push('/login')
+  }
 
   function handlePagesAdd() {
     if (page < numberPages) {
@@ -66,22 +91,29 @@ export default function SelectCountries() {
 
   useEffect(() => {
     const numPagesTemp = countries.length / 20
-    setNumberPages(Math.round(numPagesTemp))
+    setNumberPages(Math.ceil(numPagesTemp))
   }, [countries])
 
   useEffect(() => {
     async function handleFindCountries() {
-      const res = await axios.get(
-        'https://v3.football.api-sports.io/countries',
-        {
-          headers: {
-            'x-rapidapi-key': `${userKey}`,
-            'x-rapidapi-host': 'v3.football.api-sports.io',
+      try {
+        setLoading(true)
+        const res = await axios.get(
+          'https://v3.football.api-sports.io/countries',
+          {
+            headers: {
+              'x-rapidapi-key': `${userKey}`,
+              'x-rapidapi-host': 'v3.football.api-sports.io',
+            },
           },
-        },
-      )
-      console.log(res.data)
-      setCountries(res.data.response)
+        )
+        console.log(res.data)
+        setCountries(res.data.response)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        setLoading(false)
+      }
     }
     handleFindCountries()
   }, [userKey])
@@ -94,67 +126,98 @@ export default function SelectCountries() {
 
   return (
     <>
-      {userKey !== null ? (
-        <Container>
-          <h1>
-            <SoccerBall /> Escolha o país do seu time <ArrowBendRightDown />
-          </h1>
-          <div
-            className="pagesControl"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              marginTop: '0.5rem',
-            }}
-          >
-            <SoccerBall color={'#1d3557'} />
-            <p style={{ color: '#1d3557', fontStyle: 'italic' }}>
-              page {page} de {numberPages}
-            </p>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              <ButtonTeam onClick={() => handlePagesSub()}>
-                <ArrowLeft color={'#1d3557'} />
-              </ButtonTeam>
-              <ButtonTeam onClick={() => handlePagesAdd()}>
-                <ArrowRight color={'#1d3557'} />
-              </ButtonTeam>
-            </div>
-          </div>
-          <ContainerCountries>
-            {countriesCurrent &&
-              countriesCurrent.map(
-                (item) =>
-                  item.flag && (
-                    <Country
-                      key={String(item.code)}
-                      country={item.name}
-                      image={item.flag}
-                      handleClick={handleClickCountry}
-                    />
-                  ),
-              )}
-            <Country
-              country={'Brasil'}
-              image={'https://github.com/mateusrc-dev.png'}
-              handleClick={handleClickCountry}
-            />
-          </ContainerCountries>
+      {!loading ? (
+        <>
+          {userKey !== null ? (
+            <Container>
+              <Header>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                  }}
+                >
+                  <LogoImage>
+                    <Image src={logoImg} width={50} height={50} alt="logo" />
+                  </LogoImage>
+                  <h2>Meu Time</h2>
+                </div>
+                {router.asPath === '/login' || router.asPath === '/' ? null : (
+                  <SignOutContainer onClick={handleSignOut}>
+                    <SignOut color="#1d3557" weight="duotone" size="25" />
+                  </SignOutContainer>
+                )}
+              </Header>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <h1>
+                  <SoccerBall /> Escolha o país do seu time{' '}
+                  <ArrowBendRightDown />
+                </h1>
+                <div
+                  className="pagesControl"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    marginTop: '0.5rem',
+                  }}
+                >
+                  <SoccerBall color={'#1d3557'} />
+                  <p style={{ color: '#1d3557', fontStyle: 'italic' }}>
+                    page {page} de {numberPages}
+                  </p>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <ButtonTeam onClick={() => handlePagesSub()}>
+                      <ArrowLeft color={'#1d3557'} />
+                    </ButtonTeam>
+                    <ButtonTeam onClick={() => handlePagesAdd()}>
+                      <ArrowRight color={'#1d3557'} />
+                    </ButtonTeam>
+                  </div>
+                </div>
+              </div>
+              <ContainerCountries>
+                {countriesCurrent &&
+                  countriesCurrent.map(
+                    (item) =>
+                      item.flag && (
+                        <Country
+                          key={String(item.code)}
+                          country={item.name}
+                          image={item.flag}
+                          handleClick={handleClickCountry}
+                        />
+                      ),
+                  )}
+              </ContainerCountries>
 
-          <MultiStep currentStep={1} size={4} />
-        </Container>
+              <MultiStep currentStep={1} size={4} />
+            </Container>
+          ) : (
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '20rem',
+                textAlign: 'center',
+              }}
+            >
+              <h1>Você não está logado!</h1>
+            </div>
+          )}
+        </>
       ) : (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '20rem',
-            textAlign: 'center',
-          }}
-        >
-          <h1>Você não está logado!</h1>
-        </div>
+        <>
+          <ShowLoading />
+        </>
       )}
     </>
   )

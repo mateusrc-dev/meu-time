@@ -4,9 +4,9 @@ import { expect, describe, it } from 'vitest'
 
 describe('Tests of application', () => {
   it('should be able user do login with key', async () => {
-    const res = await axios.get('https://v3.football.api-sports.io/status', {
+    const res = await axios.get('http://v3.football.api-sports.io/status', {
       headers: {
-        'x-rapidapi-key': process.env.USER_KEY,
+        'x-rapidapi-key': process.env.USER_KEY_API_FOOTBALL,
         'x-rapidapi-host': 'v3.football.api-sports.io',
       },
     })
@@ -19,7 +19,7 @@ describe('Tests of application', () => {
   it('user should be able to select a country if logged in with key', async () => {
     const res = await axios.get('https://v3.football.api-sports.io/status', {
       headers: {
-        'x-rapidapi-key': process.env.USER_KEY,
+        'x-rapidapi-key': process.env.USER_KEY_API_FOOTBALL,
         'x-rapidapi-host': 'v3.football.api-sports.io',
       },
     })
@@ -32,7 +32,7 @@ describe('Tests of application', () => {
       'https://v3.football.api-sports.io/countries',
       {
         headers: {
-          'x-rapidapi-key': process.env.USER_KEY,
+          'x-rapidapi-key': process.env.USER_KEY_API_FOOTBALL,
           'x-rapidapi-host': 'v3.football.api-sports.io',
         },
       },
@@ -44,7 +44,7 @@ describe('Tests of application', () => {
   it('user should be able to select a league if they are logged in and have chosen a season', async () => {
     const res = await axios.get('https://v3.football.api-sports.io/status', {
       headers: {
-        'x-rapidapi-key': process.env.USER_KEY,
+        'x-rapidapi-key': process.env.USER_KEY_API_FOOTBALL,
         'x-rapidapi-host': 'v3.football.api-sports.io',
       },
     })
@@ -60,7 +60,7 @@ describe('Tests of application', () => {
       `https://v3.football.api-sports.io/leagues?country=${country}&season=${season}`,
       {
         headers: {
-          'x-rapidapi-key': process.env.USER_KEY,
+          'x-rapidapi-key': process.env.USER_KEY_API_FOOTBALL,
           'x-rapidapi-host': 'v3.football.api-sports.io',
         },
       },
@@ -74,7 +74,7 @@ describe('Tests of application', () => {
   it('user should be able to select a team if they are logged in and have chosen a league', async () => {
     const res = await axios.get('https://v3.football.api-sports.io/status', {
       headers: {
-        'x-rapidapi-key': process.env.USER_KEY,
+        'x-rapidapi-key': process.env.USER_KEY_API_FOOTBALL,
         'x-rapidapi-host': 'v3.football.api-sports.io',
       },
     })
@@ -90,7 +90,7 @@ describe('Tests of application', () => {
       `https://v3.football.api-sports.io/teams?league=${league}&season=${season}`,
       {
         headers: {
-          'x-rapidapi-key': process.env.USER_KEY,
+          'x-rapidapi-key': process.env.USER_KEY_API_FOOTBALL,
           'x-rapidapi-host': 'v3.football.api-sports.io',
         },
       },

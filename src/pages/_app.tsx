@@ -1,53 +1,52 @@
 import { AppProps } from 'next/app'
 import { globalStyles } from '../styles/global'
-import {
-  Body,
-  Container,
-  Header,
-  LogoImage,
-  SignOutContainer,
-} from '../styles/pages/app'
-import logoImg from '../assets/ball.svg'
-import Image from 'next/image'
-import { SignOut } from 'phosphor-react'
-import { useRouter } from 'next/router'
-import { OptionsSelectedProvider } from '../contexts/saveSelectedOptions'
+import { Body, Container, ContainerModeTheme } from '../styles/pages/app'
 
-globalStyles()
+import { MoonStars, SunHorizon } from 'phosphor-react'
+import { OptionsSelectedProvider } from '../contexts/saveSelectedOptions'
+import { useState } from 'react'
+import { createStitches } from '@stitches/react'
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter()
+  const [modeTheme, setModeTheme] = useState<boolean>(true)
+  globalStyles()
 
-  function handleSignOut() {
-    localStorage.removeItem('@meu-time:league')
-    localStorage.removeItem('@meu-time:country')
-    localStorage.removeItem('@meu-time:season')
-    localStorage.removeItem('@meu-time:userKey')
-    router.push('/login')
+  createStitches({
+    theme: {
+      colors: {
+        blue_100: !modeTheme ? '#1d3557' : '#353535',
+        blue_200: !modeTheme ? '#457b9d' : '#284b63',
+        blue_300: !modeTheme ? '#a8dadc' : '#3c6e71',
+
+        white_100: !modeTheme ? '#f1faee' : '#d9d9d9',
+
+        red_100: !modeTheme ? '#e63946' : '#ff006e',
+      },
+    },
+  })
+
+  function handleModeTheme() {
+    if (modeTheme === true) {
+      setModeTheme(false)
+    } else {
+      setModeTheme(true)
+    }
   }
-
-  console.log(router.asPath)
 
   return (
     <Container>
       <Body>
-        <Header>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <LogoImage>
-              <Image src={logoImg} width={50} height={50} alt="logo" />
-            </LogoImage>
-            <h1>Meu Time</h1>
-          </div>
-          {router.asPath === '/login' || router.asPath === '/' ? null : (
-            <SignOutContainer onClick={handleSignOut}>
-              <SignOut color="#1d3557" weight="duotone" size="25" />
-            </SignOutContainer>
-          )}
-        </Header>
         <OptionsSelectedProvider>
           <Component {...pageProps} />
         </OptionsSelectedProvider>
       </Body>
+      <ContainerModeTheme onClick={handleModeTheme}>
+        {!modeTheme ? (
+          <MoonStars size={30} color="#f1faee" />
+        ) : (
+          <SunHorizon size={30} color="#1d3557" />
+        )}
+      </ContainerModeTheme>
     </Container>
   )
 }

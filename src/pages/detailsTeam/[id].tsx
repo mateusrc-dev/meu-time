@@ -15,11 +15,16 @@ import {
   ArrowBendUpLeft,
   ArrowLeft,
   ArrowRight,
+  SignOut,
   SoccerBall,
 } from 'phosphor-react'
 import { OptionsSelectedContext } from '../../contexts/saveSelectedOptions'
 import { BarGraph } from '../../components/BarGraph'
 import { ContainerAllBar } from '../../components/BarGraph/styles'
+import { Header, LogoImage, SignOutContainer } from '../../styles/pages/app'
+import Image from 'next/image'
+import logoImg from '../../assets/ball.svg'
+import ShowLoading from '../../components/Loading'
 
 interface TeamProps {
   team: {
@@ -146,9 +151,16 @@ export default function DetailsTime() {
   const [players, setPlayers] = useState<PlayersProps[]>([])
   const [teamStatistic, setTeamStatistic] = useState<StatisticsProps>()
   const [page, setPage] = useState<number>(1)
-  const { league, season, country, userKey } = useContext(
-    OptionsSelectedContext,
-  )
+  const {
+    league,
+    handleCountry,
+    handleLeague,
+    handleSeason,
+    handleUserKey,
+    season,
+    country,
+    userKey,
+  } = useContext(OptionsSelectedContext)
   const { query, push } = useRouter()
 
   console.log(teamId)
@@ -163,6 +175,18 @@ export default function DetailsTime() {
     if (page > 1) {
       setPage((prevState) => prevState - 1)
     }
+  }
+
+  function handleSignOut() {
+    localStorage.removeItem('@meu-time:league')
+    localStorage.removeItem('@meu-time:country')
+    localStorage.removeItem('@meu-time:season')
+    localStorage.removeItem('@meu-time:userKey')
+    handleCountry(null)
+    handleLeague(null)
+    handleSeason(null)
+    handleUserKey(null)
+    push('/login')
   }
 
   function handleReturn() {
@@ -284,10 +308,28 @@ export default function DetailsTime() {
           season !== null &&
           league !== null ? (
             <Container>
+              <Header>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                  }}
+                >
+                  <LogoImage>
+                    <Image src={logoImg} width={50} height={50} alt="logo" />
+                  </LogoImage>
+                  <h2>Meu Time</h2>
+                </div>
+
+                <SignOutContainer onClick={handleSignOut}>
+                  <SignOut color="#1d3557" weight="duotone" size="25" />
+                </SignOutContainer>
+              </Header>
               <HeaderTeam>
-                <h1>
+                <p>
                   <SoccerBall /> Detalhes do time <ArrowBendRightDown />
-                </h1>
+                </p>
                 <div
                   style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}
                 >
@@ -310,10 +352,10 @@ export default function DetailsTime() {
               {page === 1 && (
                 <>
                   <HeaderTeam>
-                    <h1>
+                    <p>
                       <SoccerBall /> Informações sobre o time{' '}
                       <ArrowBendRightDown />
-                    </h1>
+                    </p>
                   </HeaderTeam>
                   <ContainerDetailsTeams>
                     <ContainerTeamDetails>
@@ -338,15 +380,15 @@ export default function DetailsTime() {
                       <ImageTeam
                         src={teamDetails[0]?.team?.logo}
                         alt="logo do time"
-                        width={175}
-                        height={80}
+                        width="132"
+                        height="100"
                       />
                     </ContainerTeamDetails>
                   </ContainerDetailsTeams>
                   <HeaderTeam>
-                    <h1>
+                    <p>
                       <SoccerBall /> Jogadores do time <ArrowBendRightDown />
-                    </h1>
+                    </p>
                   </HeaderTeam>
                   <ContainerDetailsTeams>
                     {players.map((item) => (
@@ -377,10 +419,10 @@ export default function DetailsTime() {
               {page === 2 && (
                 <>
                   <HeaderTeam>
-                    <h1>
+                    <p>
                       <SoccerBall /> Formação mais utilizada da temporada{' '}
                       <ArrowBendRightDown />
-                    </h1>
+                    </p>
                   </HeaderTeam>
                   <ContainerDetailsTeams>
                     {teamStatistic?.lineups?.map((item) => (
@@ -401,10 +443,10 @@ export default function DetailsTime() {
                     ))}
                   </ContainerDetailsTeams>
                   <HeaderTeam>
-                    <h1>
+                    <p>
                       <SoccerBall />
                       Tabela de resultados <ArrowBendRightDown />
-                    </h1>
+                    </p>
                   </HeaderTeam>
                   <TableTeam>
                     <thead>
@@ -429,10 +471,10 @@ export default function DetailsTime() {
               {page === 3 && (
                 <>
                   <HeaderTeam>
-                    <h1>
+                    <p>
                       <SoccerBall /> Gols marcados por tempo de jogo{' '}
                       <ArrowBendRightDown />
-                    </h1>
+                    </p>
                   </HeaderTeam>
                   <ContainerAllBar>
                     <ContainerTeamDetails>
@@ -1042,7 +1084,7 @@ export default function DetailsTime() {
         </>
       ) : (
         <>
-          <h1>Carregando...</h1>
+          <ShowLoading />
         </>
       )}
     </>
