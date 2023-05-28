@@ -1,6 +1,6 @@
 # Projeto Meu Time
 
-Nesse projeto o usuário pode logar com uma chave API da sua conta do site https://dashboard.api-football.com/login
+Nesse projeto o usuário pode se autenticar na aplicação através de uma chave API fornecida por sua conta criada no site https://dashboard.api-football.com/login
 
 O aplicativo consiste em poder acompanhar dados sobre time de futebol, para o usuário escolher um time ele precisa primeiro escolher um país, uma temporada e uma liga
 
