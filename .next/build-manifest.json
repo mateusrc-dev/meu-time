@@ -29,11 +29,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/detailsTeam/[id].js"
-    ],
-    "/selectTeams": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/selectTeams.js"
     ]
   },
   "ampFirstPages": []

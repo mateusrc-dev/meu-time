@@ -366,7 +366,7 @@ export default function DetailsTime() {
                     </ContainerTeamDetails>
                     <ContainerTeamDetails>
                       <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
-                        Cidade do time:
+                        País do time:
                       </span>
                       <span>{teamDetails[0]?.team?.country}</span>
                     </ContainerTeamDetails>
