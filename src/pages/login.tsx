@@ -75,8 +75,8 @@ export default function Login() {
           </Button>
         </Body>
       </ContainerBody>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <Warning size={50} />
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <Warning size={100} color="#e63946" />
         <h1
           style={{
             fontSize: '1rem',
@@ -88,7 +88,7 @@ export default function Login() {
             style={{
               color: '#e63946',
               fontStyle: 'italic',
-              textDecoration: 'none',
+              textDecoration: 'underline',
             }}
             href="https://dashboard.api-football.com/login"
             target="_blank"
@@ -96,7 +96,9 @@ export default function Login() {
             nesse site (API-FOOTBALL)
           </a>{' '}
           e cole a api-key fornecida dentro da sua conta no espaço acima. É
-          possível fazer apenas 100 pedidos por dia.
+          possível fazer apenas 100 pedidos por dia e 10 pedidos por minutos,
+          após atingidos esses limites os dados dos times, temporadas, ligas,
+          países param de ser enviados.
         </h1>
       </div>
     </Container>
