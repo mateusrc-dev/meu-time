@@ -25,7 +25,6 @@ import { Header, LogoImage, SignOutContainer } from '../../styles/pages/app'
 import Image from 'next/image'
 import logoImg from '../../assets/ball.svg'
 import ShowLoading from '../../components/Loading'
-
 interface TeamProps {
   team: {
     code: string
@@ -163,7 +162,7 @@ export default function DetailsTime() {
   } = useContext(OptionsSelectedContext)
   const { query, push } = useRouter()
 
-  console.log(teamId)
+  console.log(teamStatistic?.lineups?.length)
 
   function handlePagesAdd() {
     if (page < 3) {
@@ -362,27 +361,47 @@ export default function DetailsTime() {
                       <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
                         Nome do time:
                       </span>
-                      <span>{teamDetails[0]?.team?.name}</span>
+                      <span>
+                        {teamDetails[0]?.team?.name === null ||
+                        teamDetails[0]?.team?.name === undefined
+                          ? 'Esse dado não existe!'
+                          : teamDetails[0]?.team?.name}
+                      </span>
                     </ContainerTeamDetails>
                     <ContainerTeamDetails>
                       <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
                         País do time:
                       </span>
-                      <span>{teamDetails[0]?.team?.country}</span>
+                      <span>
+                        {teamDetails[0]?.team?.country === null ||
+                        teamDetails[0]?.team?.country === undefined
+                          ? 'Esse dado não existe!'
+                          : teamDetails[0]?.team?.country}
+                      </span>
                     </ContainerTeamDetails>
                     <ContainerTeamDetails>
                       <span style={{ fontWeight: 'bold', fontSize: '1.25rem' }}>
                         Ano de fundação:
                       </span>
-                      <span>{teamDetails[0]?.team?.founded}</span>
+                      <span>
+                        {teamDetails[0]?.team?.founded === null ||
+                        teamDetails[0]?.team?.founded === undefined
+                          ? 'Esse dado não existe!'
+                          : teamDetails[0]?.team?.founded}
+                      </span>
                     </ContainerTeamDetails>
                     <ContainerTeamDetails>
-                      <ImageTeam
-                        src={teamDetails[0]?.team?.logo}
-                        alt="logo do time"
-                        width="132"
-                        height="100"
-                      />
+                      {teamDetails[0]?.team?.logo === null ||
+                      teamDetails[0]?.team?.logo === undefined ? (
+                        'A imagem do time não existe!'
+                      ) : (
+                        <ImageTeam
+                          src={teamDetails[0]?.team?.logo}
+                          alt="logo do time"
+                          width="132"
+                          height="100"
+                        />
+                      )}
                     </ContainerTeamDetails>
                   </ContainerDetailsTeams>
                   <HeaderTeam>
@@ -391,28 +410,47 @@ export default function DetailsTime() {
                     </p>
                   </HeaderTeam>
                   <ContainerDetailsTeams>
-                    {players.map((item) => (
-                      <ContainerTeamDetails key={String(item.player.id)}>
-                        <span
-                          style={{ fontWeight: 'bold', fontSize: '1.25rem' }}
-                        >
-                          Nome:
-                        </span>
-                        <span>{item.player.name}</span>
-                        <span
-                          style={{ fontWeight: 'bold', fontSize: '1.25rem' }}
-                        >
-                          Idade:
-                        </span>
-                        <span>{item.player.age}</span>
-                        <span
-                          style={{ fontWeight: 'bold', fontSize: '1.25rem' }}
-                        >
-                          Nacionalidade:
-                        </span>
-                        <span>{item.player.nationality}</span>
-                      </ContainerTeamDetails>
-                    ))}
+                    {players.length === 0 ? (
+                      <h1>Não existe nenhum jogador!</h1>
+                    ) : (
+                      players.map((item) => (
+                        <ContainerTeamDetails key={String(item.player.id)}>
+                          <span
+                            style={{ fontWeight: 'bold', fontSize: '1.25rem' }}
+                          >
+                            Nome:
+                          </span>
+                          <span>
+                            {item.player.name === null ||
+                            item.player.name === undefined
+                              ? 'Esse dado não existe!'
+                              : item.player.name}
+                          </span>
+                          <span
+                            style={{ fontWeight: 'bold', fontSize: '1.25rem' }}
+                          >
+                            Idade:
+                          </span>
+                          <span>
+                            {item.player.age === null ||
+                            item.player.age === undefined
+                              ? 'Esse dado não existe!'
+                              : item.player.age}
+                          </span>
+                          <span
+                            style={{ fontWeight: 'bold', fontSize: '1.25rem' }}
+                          >
+                            Nacionalidade:
+                          </span>
+                          <span>
+                            {item.player.nationality === null ||
+                            item.player.nationality === undefined
+                              ? 'Esse dado não existe!'
+                              : item.player.nationality}
+                          </span>
+                        </ContainerTeamDetails>
+                      ))
+                    )}
                   </ContainerDetailsTeams>
                 </>
               )}
@@ -425,22 +463,36 @@ export default function DetailsTime() {
                     </p>
                   </HeaderTeam>
                   <ContainerDetailsTeams>
-                    {teamStatistic?.lineups?.map((item) => (
-                      <ContainerTeamDetails key={String(item.played)}>
-                        <span
-                          style={{ fontWeight: 'bold', fontSize: '1.25rem' }}
-                        >
-                          Formação:
-                        </span>
-                        <span>{item.formation}</span>
-                        <span
-                          style={{ fontWeight: 'bold', fontSize: '1.25rem' }}
-                        >
-                          Jogo:
-                        </span>
-                        <span>{item.played}</span>
-                      </ContainerTeamDetails>
-                    ))}
+                    {teamStatistic?.lineups?.length === 0 ||
+                    teamStatistic?.lineups === undefined ? (
+                      <h1>Não existem formações a serem exibidas!</h1>
+                    ) : (
+                      teamStatistic?.lineups?.map((item) => (
+                        <ContainerTeamDetails key={String(item.played)}>
+                          <span
+                            style={{ fontWeight: 'bold', fontSize: '1.25rem' }}
+                          >
+                            Formação:
+                          </span>
+                          <span>
+                            {item.formation === null ||
+                            item.formation === undefined
+                              ? 'Esse dado não existe!'
+                              : item.formation}
+                          </span>
+                          <span
+                            style={{ fontWeight: 'bold', fontSize: '1.25rem' }}
+                          >
+                            Jogo:
+                          </span>
+                          <span>
+                            {item.played === null || item.played === undefined
+                              ? 'Esse dado não existe!'
+                              : item.played}
+                          </span>
+                        </ContainerTeamDetails>
+                      ))
+                    )}
                   </ContainerDetailsTeams>
                   <HeaderTeam>
                     <p>
@@ -459,10 +511,30 @@ export default function DetailsTime() {
                     </thead>
                     <tbody>
                       <tr>
-                        <td>{teamStatistic?.fixtures?.played?.total}</td>
-                        <td>{teamStatistic?.fixtures?.wins?.total}</td>
-                        <td>{teamStatistic?.fixtures?.loses?.total}</td>
-                        <td>{teamStatistic?.fixtures?.draws?.total}</td>
+                        <td>
+                          {teamStatistic?.fixtures?.played?.total === null ||
+                          teamStatistic?.fixtures?.played?.total === undefined
+                            ? 'Esse dado não existe!'
+                            : teamStatistic?.fixtures?.played?.total}
+                        </td>
+                        <td>
+                          {teamStatistic?.fixtures?.wins?.total === null ||
+                          teamStatistic?.fixtures?.wins?.total === undefined
+                            ? 'Esse dado não existe!'
+                            : teamStatistic?.fixtures?.wins?.total}
+                        </td>
+                        <td>
+                          {teamStatistic?.fixtures?.loses?.total === null ||
+                          teamStatistic?.fixtures?.loses?.total === undefined
+                            ? 'Esse dado não existe!'
+                            : teamStatistic?.fixtures?.loses?.total}
+                        </td>
+                        <td>
+                          {teamStatistic?.fixtures?.draws?.total === null ||
+                          teamStatistic?.fixtures?.draws?.total === undefined
+                            ? 'Esse dado não existe!'
+                            : teamStatistic?.fixtures?.draws?.total}
+                        </td>
                       </tr>
                     </tbody>
                   </TableTeam>
@@ -512,10 +584,13 @@ export default function DetailsTime() {
                             total:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['0-15']
-                                ?.total
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['0-15']
+                              ?.total === null ||
+                            teamStatistic?.goals?.against?.minute?.['0-15']
+                              ?.total === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.['0-15']
+                                  ?.total}
                           </span>
                         </div>
                         <div
@@ -531,10 +606,13 @@ export default function DetailsTime() {
                             porcentagem:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['0-15']
-                                ?.percentage
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['0-15']
+                              ?.percentage === null ||
+                            teamStatistic?.goals?.against?.minute?.['0-15']
+                              ?.percentage === undefined
+                              ? 'Esse dado não existe'
+                              : teamStatistic?.goals?.against?.minute?.['0-15']
+                                  ?.percentage}
                           </span>
                         </div>
                       </div>
@@ -585,10 +663,13 @@ export default function DetailsTime() {
                             total:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['16-30']
-                                ?.total
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['16-30']
+                              ?.total === null ||
+                            teamStatistic?.goals?.against?.minute?.['16-30']
+                              ?.total === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.['16-30']
+                                  ?.total}
                           </span>
                         </div>
                         <div
@@ -604,10 +685,13 @@ export default function DetailsTime() {
                             porcentagem:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['16-30']
-                                ?.percentage
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['16-30']
+                              ?.percentage === null ||
+                            teamStatistic?.goals?.against?.minute?.['16-30']
+                              ?.percentage === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.['16-30']
+                                  ?.percentage}
                           </span>
                         </div>
                       </div>
@@ -658,10 +742,13 @@ export default function DetailsTime() {
                             total:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['31-45']
-                                ?.total
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['31-45']
+                              ?.total === null ||
+                            teamStatistic?.goals?.against?.minute?.['31-45']
+                              ?.total === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.['31-45']
+                                  ?.total}
                           </span>
                         </div>
                         <div
@@ -677,10 +764,13 @@ export default function DetailsTime() {
                             porcentagem:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['31-45']
-                                ?.percentage
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['31-45']
+                              ?.percentage === null ||
+                            teamStatistic?.goals?.against?.minute?.['31-45']
+                              ?.percentage === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.['31-45']
+                                  ?.percentage}
                           </span>
                         </div>
                       </div>
@@ -731,10 +821,13 @@ export default function DetailsTime() {
                             total:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['46-60']
-                                ?.total
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['46-60']
+                              ?.total === null ||
+                            teamStatistic?.goals?.against?.minute?.['46-60']
+                              ?.total === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.['46-60']
+                                  ?.total}
                           </span>
                         </div>
                         <div
@@ -750,10 +843,13 @@ export default function DetailsTime() {
                             porcentagem:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['46-60']
-                                ?.percentage
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['46-60']
+                              ?.percentage === null ||
+                            teamStatistic?.goals?.against?.minute?.['46-60']
+                              ?.percentage === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.['46-60']
+                                  ?.percentage}
                           </span>
                         </div>
                       </div>
@@ -804,10 +900,13 @@ export default function DetailsTime() {
                             total:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['61-75']
-                                ?.total
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['61-75']
+                              ?.total === null ||
+                            teamStatistic?.goals?.against?.minute?.['61-75']
+                              ?.total === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.['61-75']
+                                  ?.total}
                           </span>
                         </div>
                         <div
@@ -823,10 +922,13 @@ export default function DetailsTime() {
                             porcentagem:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['61-75']
-                                ?.percentage
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['61-75']
+                              ?.percentage === null ||
+                            teamStatistic?.goals?.against?.minute?.['61-75']
+                              ?.percentage === undefined
+                              ? 'Esse dado não existe'
+                              : teamStatistic?.goals?.against?.minute?.['61-75']
+                                  ?.percentage}
                           </span>
                         </div>
                       </div>
@@ -877,10 +979,13 @@ export default function DetailsTime() {
                             total:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['76-90']
-                                ?.total
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['76-90']
+                              ?.total === null ||
+                            teamStatistic?.goals?.against?.minute?.['76-90']
+                              ?.total === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.['76-90']
+                                  ?.total}
                           </span>
                         </div>
                         <div
@@ -896,10 +1001,13 @@ export default function DetailsTime() {
                             porcentagem:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['76-90']
-                                ?.percentage
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['76-90']
+                              ?.percentage === null ||
+                            teamStatistic?.goals?.against?.minute?.['76-90']
+                              ?.percentage === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.['76-90']
+                                  ?.percentage}
                           </span>
                         </div>
                       </div>
@@ -950,10 +1058,14 @@ export default function DetailsTime() {
                             total:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['91-105']
-                                ?.total
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['91-105']
+                              ?.total === null ||
+                            teamStatistic?.goals?.against?.minute?.['91-105']
+                              ?.total === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.[
+                                  '91-105'
+                                ]?.total}
                           </span>
                         </div>
                         <div
@@ -969,10 +1081,14 @@ export default function DetailsTime() {
                             porcentagem:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['91-105']
-                                ?.percentage
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['91-105']
+                              ?.percentage === null ||
+                            teamStatistic?.goals?.against?.minute?.['91-105']
+                              ?.percentage === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.[
+                                  '91-105'
+                                ]?.percentage}
                           </span>
                         </div>
                       </div>
@@ -1023,10 +1139,14 @@ export default function DetailsTime() {
                             total:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['106-120']
-                                ?.total
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['106-120']
+                              ?.total === null ||
+                            teamStatistic?.goals?.against?.minute?.['106-120']
+                              ?.total === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.[
+                                  '106-120'
+                                ]?.total}
                           </span>
                         </div>
                         <div
@@ -1042,10 +1162,14 @@ export default function DetailsTime() {
                             porcentagem:
                           </span>
                           <span>
-                            {
-                              teamStatistic?.goals?.against?.minute?.['106-120']
-                                ?.percentage
-                            }
+                            {teamStatistic?.goals?.against?.minute?.['106-120']
+                              ?.percentage === null ||
+                            teamStatistic?.goals?.against?.minute?.['106-120']
+                              ?.percentage === undefined
+                              ? 'Esse dado não existe!'
+                              : teamStatistic?.goals?.against?.minute?.[
+                                  '106-120'
+                                ]?.percentage}
                           </span>
                         </div>
                       </div>
