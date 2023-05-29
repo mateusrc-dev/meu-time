@@ -4,7 +4,7 @@ import { expect, describe, it } from 'vitest'
 
 describe('Tests of application', () => {
   it('should be able user do login with key', async () => {
-    const res = await axios.get('http://v3.football.api-sports.io/status', {
+    const res = await axios.get('https://v3.football.api-sports.io/status', {
       headers: {
         'x-rapidapi-key': process.env.USER_KEY_API_FOOTBALL,
         'x-rapidapi-host': 'v3.football.api-sports.io',

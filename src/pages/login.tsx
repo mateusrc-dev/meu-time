@@ -24,7 +24,7 @@ export default function Login() {
   async function handleEnter() {
     try {
       setLoading(true)
-      const res = await axios.get('http://v3.football.api-sports.io/status', {
+      const res = await axios.get('https://v3.football.api-sports.io/status', {
         headers: {
           'x-rapidapi-key': `${keyUser}`,
           'x-rapidapi-host': 'v3.football.api-sports.io',
