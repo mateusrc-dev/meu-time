@@ -32,27 +32,14 @@ export default function SelectCountries() {
   const [page, setPage] = useState<number>(1)
   const [pageStartCurrent, setPageStartCurrent] = useState<number>(0)
   const [pageEndCurrent, setPageEndCurrent] = useState<number>(19)
-  const {
-    handleCountry,
-    handleLeague,
-    handleSeason,
-    handleUserKey,
-    country,
-    league,
-    season,
-    userKey,
-  } = useContext(OptionsSelectedContext)
+  const { handleCountry, handleLeague, handleSeason, handleUserKey, userKey } =
+    useContext(OptionsSelectedContext)
   const router = useRouter()
 
   function handleClickCountry(country: string) {
     handleCountry(country)
     router.push('/selectSeasons')
   }
-
-  console.log(userKey)
-  console.log(country)
-  console.log(league)
-  console.log(season)
 
   function handleSignOut() {
     localStorage.removeItem('@meu-time:league')
@@ -107,7 +94,7 @@ export default function SelectCountries() {
             },
           },
         )
-        console.log(res.data)
+
         setCountries(res.data.response)
       } catch (err) {
         console.log(err)

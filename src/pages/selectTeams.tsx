@@ -77,8 +77,6 @@ export default function SelectTeams() {
     router.push('/selectLeagues')
   }
 
-  console.log(teams)
-
   useEffect(() => {
     async function handleFindTeams() {
       try {
@@ -92,7 +90,6 @@ export default function SelectTeams() {
             },
           },
         )
-        console.log(res.data)
         setTeams(res.data.response)
       } catch (err) {
         console.log(err)

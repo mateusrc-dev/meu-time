@@ -50,6 +50,15 @@ export const ContainerDetailsTeams = styled('div', {
   height: '15rem',
   flexWrap: 'wrap',
   overflow: 'auto',
+
+  h1: {
+    animationName: `${leftAnimation}`,
+    animationDirection: 'normal',
+    animationDuration: '1s',
+    animationTimingFunction: 'ease-out',
+    marginTop: '0.5rem',
+  },
+
   '&::-webkit-scrollbar': {
     width: 15,
   },

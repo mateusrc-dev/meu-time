@@ -55,8 +55,6 @@ export default function SelectLeagues() {
   } = useContext(OptionsSelectedContext)
   const router = useRouter()
 
-  console.log(leagues)
-
   function handleSignOut() {
     localStorage.removeItem('@meu-time:league')
     localStorage.removeItem('@meu-time:country')
@@ -91,7 +89,6 @@ export default function SelectLeagues() {
             },
           },
         )
-        console.log(res.data)
         setLeagues(res.data.response)
       } catch (err) {
         console.log(err)

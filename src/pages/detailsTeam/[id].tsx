@@ -162,8 +162,6 @@ export default function DetailsTime() {
   } = useContext(OptionsSelectedContext)
   const { query, push } = useRouter()
 
-  console.log(teamStatistic?.lineups?.length)
-
   function handlePagesAdd() {
     if (page < 3) {
       setPage((prevState) => prevState + 1)
@@ -228,7 +226,6 @@ export default function DetailsTime() {
               },
             },
           )
-          console.log(res.data)
           setTeamDetails(res.data.response)
         } else {
           setTeamId(Number(query.id))
@@ -256,7 +253,6 @@ export default function DetailsTime() {
               },
             },
           )
-          console.log(res.data)
           setPlayers(res.data.response)
         } else {
           setTeamId(Number(query.id))
@@ -284,7 +280,6 @@ export default function DetailsTime() {
               },
             },
           )
-          console.log(res.data)
           setTeamStatistic(res.data.response)
         } else {
           setTeamId(Number(query.id))
