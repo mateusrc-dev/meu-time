@@ -56,6 +56,7 @@ export default function SelectLeagues() {
   const router = useRouter()
 
   function handleSignOut() {
+    setLoading(true)
     localStorage.removeItem('@meu-time:league')
     localStorage.removeItem('@meu-time:country')
     localStorage.removeItem('@meu-time:season')
