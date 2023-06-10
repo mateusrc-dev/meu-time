@@ -329,7 +329,7 @@ export default function DetailsTime() {
                   style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}
                 >
                   <p style={{ color: '#1d3557', fontStyle: 'italic' }}>
-                    page {page} de 3
+                    página {page} de 3
                   </p>
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <ButtonTeam onClick={() => handlePagesSub()}>

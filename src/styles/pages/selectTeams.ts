@@ -67,6 +67,7 @@ export const ContainerTeams = styled('div', {
   marginBottom: 'auto',
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
   gap: '1.5rem',
   flexWrap: 'wrap',
   overflow: 'auto',

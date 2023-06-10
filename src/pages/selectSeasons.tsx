@@ -5,6 +5,7 @@ import Season from '../components/season'
 import {
   ArrowBendRightDown,
   ArrowBendUpLeft,
+  HouseLine,
   SignOut,
   SoccerBall,
 } from 'phosphor-react'
@@ -53,6 +54,10 @@ export default function SelectSeasons() {
   }
 
   function handleReturn() {
+    router.push('/selectCountries')
+  }
+
+  function handleReturnsHome() {
     router.push('/selectCountries')
   }
 
@@ -108,11 +113,26 @@ export default function SelectSeasons() {
                   </LogoImage>
                   <h2>Meu Time</h2>
                 </div>
-                {router.asPath === '/login' || router.asPath === '/' ? null : (
-                  <SignOutContainer onClick={handleSignOut}>
-                    <SignOut color="#1d3557" weight="duotone" size="25" />
-                  </SignOutContainer>
-                )}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                  }}
+                >
+                  {router.asPath === '/login' ||
+                  router.asPath === '/' ? null : (
+                    <SignOutContainer onClick={handleReturnsHome}>
+                      <HouseLine color="#1d3557" weight="duotone" size="25" />
+                    </SignOutContainer>
+                  )}
+                  {router.asPath === '/login' ||
+                  router.asPath === '/' ? null : (
+                    <SignOutContainer onClick={handleSignOut}>
+                      <SignOut color="#1d3557" weight="duotone" size="25" />
+                    </SignOutContainer>
+                  )}
+                </div>
               </Header>
               <HeaderSeasons>
                 <h1>

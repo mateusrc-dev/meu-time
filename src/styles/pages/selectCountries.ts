@@ -50,11 +50,13 @@ export const Container = styled('div', {
 })
 
 export const ContainerCountries = styled('div', {
+  position: 'relative',
   padding: '1rem 1rem',
   marginTop: '1rem',
   marginBottom: 'auto',
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
   gap: '1.5rem',
   flexWrap: 'wrap',
   overflow: 'auto',
@@ -78,5 +80,41 @@ export const ContainerCountries = styled('div', {
     borderRadius: 10,
     backgroundClip: 'padding-box',
     border: '3px solid transparent',
+  },
+})
+
+export const ButtonTeamRight = styled('button', {
+  position: 'absolute',
+  height: '100%',
+  right: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '2.5rem',
+  border: 'none',
+  borderRadius: '5px',
+  background:
+    'linear-gradient(90deg, rgba(0,116,196,0) 0%, rgba(47,120,171,1) 35%,  rgba(40,75,99,1) 100%)',
+  cursor: 'pointer',
+  '&:hover': {
+    filter: 'brightness(0.8)',
+  },
+})
+
+export const ButtonTeamLeft = styled('button', {
+  position: 'absolute',
+  height: '100%',
+  left: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '2.5rem',
+  border: 'none',
+  borderRadius: '5px',
+  background:
+    'linear-gradient(90deg, rgba(40,75,99,1) 0%, rgba(47,120,171,1) 35%, rgba(0,116,196,0) 100%)',
+  cursor: 'pointer',
+  '&:hover': {
+    filter: 'brightness(0.8)',
   },
 })

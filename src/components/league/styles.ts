@@ -15,6 +15,7 @@ export const Container = styled('div', {
     boxShadow: '6px 6px 5px rgba(0, 0, 0, 0.5)',
     transform: 'translate(-6px, -6px)',
     borderColor: '$red_100',
+    backgroundColor: '$blue_200',
   },
 })
 

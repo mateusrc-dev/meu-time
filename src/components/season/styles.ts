@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { styled } from '../../styles'
 
 export const Container = styled('div', {
@@ -23,5 +22,6 @@ export const Container = styled('div', {
     transform: 'translate(-6px, -6px)',
     borderColor: '$red_100',
     textDecoration: 'underline',
+    backgroundColor: '$blue_200',
   },
 })

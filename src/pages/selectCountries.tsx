@@ -2,17 +2,22 @@ import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Country from '../components/country'
 import { MultiStep } from '../components/MultiStep'
-import { Container, ContainerCountries } from '../styles/pages/selectCountries'
+import {
+  ButtonTeamLeft,
+  ButtonTeamRight,
+  Container,
+  ContainerCountries,
+} from '../styles/pages/selectCountries'
 import {
   ArrowBendRightDown,
   ArrowLeft,
   ArrowRight,
+  HouseLine,
   SignOut,
   SoccerBall,
 } from 'phosphor-react'
 import { useRouter } from 'next/router'
 import { OptionsSelectedContext } from '../contexts/saveSelectedOptions'
-import { ButtonTeam } from '../styles/pages/detailsTeam'
 import ShowLoading from '../components/Loading'
 import { Header, LogoImage, SignOutContainer } from '../styles/pages/app'
 import Image from 'next/image'
@@ -31,7 +36,7 @@ export default function SelectCountries() {
   const [numberPages, setNumberPages] = useState<number>(0)
   const [page, setPage] = useState<number>(1)
   const [pageStartCurrent, setPageStartCurrent] = useState<number>(0)
-  const [pageEndCurrent, setPageEndCurrent] = useState<number>(19)
+  const [pageEndCurrent, setPageEndCurrent] = useState<number>(9)
   const { handleCountry, handleLeague, handleSeason, handleUserKey, userKey } =
     useContext(OptionsSelectedContext)
   const router = useRouter()
@@ -57,17 +62,21 @@ export default function SelectCountries() {
   function handlePagesAdd() {
     if (page < numberPages) {
       setPage((prevState) => prevState + 1)
-      setPageStartCurrent((prevState) => prevState + 20)
-      setPageEndCurrent((prevState) => prevState + 20)
+      setPageStartCurrent((prevState) => prevState + 10)
+      setPageEndCurrent((prevState) => prevState + 10)
     }
   }
 
   function handlePagesSub() {
     if (page > 1) {
       setPage((prevState) => prevState - 1)
-      setPageStartCurrent((prevState) => prevState - 20)
-      setPageEndCurrent((prevState) => prevState - 20)
+      setPageStartCurrent((prevState) => prevState - 10)
+      setPageEndCurrent((prevState) => prevState - 10)
     }
+  }
+
+  function handleReturnsHome() {
+    router.push('/selectCountries')
   }
 
   useEffect(() => {
@@ -78,7 +87,7 @@ export default function SelectCountries() {
   }, [countries, pageStartCurrent, pageEndCurrent])
 
   useEffect(() => {
-    const numPagesTemp = countries.length / 20
+    const numPagesTemp = countries.length / 10
     setNumberPages(Math.ceil(numPagesTemp))
   }, [countries])
 
@@ -131,11 +140,26 @@ export default function SelectCountries() {
                   </LogoImage>
                   <h2>Meu Time</h2>
                 </div>
-                {router.asPath === '/login' || router.asPath === '/' ? null : (
-                  <SignOutContainer onClick={handleSignOut}>
-                    <SignOut color="#1d3557" weight="duotone" size="25" />
-                  </SignOutContainer>
-                )}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                  }}
+                >
+                  {router.asPath === '/login' ||
+                  router.asPath === '/' ? null : (
+                    <SignOutContainer onClick={handleReturnsHome}>
+                      <HouseLine color="#1d3557" weight="duotone" size="25" />
+                    </SignOutContainer>
+                  )}
+                  {router.asPath === '/login' ||
+                  router.asPath === '/' ? null : (
+                    <SignOutContainer onClick={handleSignOut}>
+                      <SignOut color="#1d3557" weight="duotone" size="25" />
+                    </SignOutContainer>
+                  )}
+                </div>
               </Header>
               <div
                 style={{
@@ -159,19 +183,18 @@ export default function SelectCountries() {
                 >
                   <SoccerBall color={'#1d3557'} />
                   <p style={{ color: '#1d3557', fontStyle: 'italic' }}>
-                    page {page} de {numberPages}
+                    página {page} de {numberPages}
                   </p>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <ButtonTeam onClick={() => handlePagesSub()}>
-                      <ArrowLeft color={'#1d3557'} />
-                    </ButtonTeam>
-                    <ButtonTeam onClick={() => handlePagesAdd()}>
-                      <ArrowRight color={'#1d3557'} />
-                    </ButtonTeam>
-                  </div>
                 </div>
               </div>
               <ContainerCountries>
+                <ButtonTeamLeft onClick={() => handlePagesSub()}>
+                  <ArrowLeft color={'#ffff'} size="1rem" />
+                </ButtonTeamLeft>
+                <ButtonTeamRight onClick={() => handlePagesAdd()}>
+                  <ArrowRight color={'#ffff'} size="1rem" />
+                </ButtonTeamRight>
+
                 {countriesCurrent &&
                   countriesCurrent.map(
                     (item) =>

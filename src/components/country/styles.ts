@@ -1,5 +1,16 @@
 import Image from 'next/image'
-import { styled } from '../../styles'
+import { keyframes, styled } from '../../styles'
+
+const scaleAnimation = keyframes({
+  '0%': {
+    opacity: 0,
+    transform: 'scale(0.9)',
+  },
+  '100%': {
+    opacity: 1,
+    transform: 'scale(1)',
+  },
+})
 
 export const Container = styled('button', {
   padding: '1rem',
@@ -10,11 +21,16 @@ export const Container = styled('button', {
   borderRadius: '10px',
   transition: 'all 0.3s',
   cursor: 'pointer',
+  animationName: `${scaleAnimation}`,
+  animationDirection: 'normal',
+  animationDuration: '1s',
+  animationTimingFunction: 'ease-out',
 
   '&:hover': {
     boxShadow: '6px 6px 5px rgba(0, 0, 0, 0.5)',
     transform: 'translate(-6px, -6px)',
     borderColor: '$red_100',
+    backgroundColor: '$blue_200',
   },
 })
 
