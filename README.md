@@ -14,3 +14,6 @@ O aplicativo consiste em poder acompanhar dados sobre time de futebol, para o us
 
 Para executar a aplicação basta usar o comando: 'npm run dev'
 Para executar os testes é necessário criar um arquivo '.env' seguindo como exemplo o arquivo '.env.example.' Após criar o arquivo .env basta executar o comando: 'npm run test'
+
+## Deploy da aplicação:
+✔️ https://meu-timee.netlify.app/
